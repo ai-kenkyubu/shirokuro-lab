@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="食洗機と手洗い、本当に得なのはどっち？メーカー公表データをもとに、水道光熱費・作業時間・本体価格の損益分岐を検証します。">
+  <title>食洗機と手洗い、本当に得なのはどっち？｜AI研究部 白黒ラボ</title>
+
+  <style>
+    :root {
+      --black: #111111;
+      --dark: #202020;
+      --gray: #666666;
+      --light-gray: #f2f2f2;
+      --border: #dddddd;
+      --white: #ffffff;
+      --lime: #E8FF47;
+      --max-width: 960px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--white);
+      color: var(--black);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        Meiryo,
+        sans-serif;
+      line-height: 1.85;
+      font-size: 15px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .portal-bar {
+      display: block;
+      width: 100%;
+      padding: 11px 20px;
+      background: var(--black);
+      color: var(--lime);
+      text-align: center;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      transition: opacity 0.2s;
+    }
+
+    .portal-bar:hover {
+      opacity: 0.8;
+    }
+
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 20px;
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .site-name {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .site-name span {
+      display: inline-block;
+      margin-right: 7px;
+      padding: 2px 6px;
+      background: var(--black);
+      color: var(--lime);
+      font-size: 11px;
+      vertical-align: 2px;
+    }
+
+    .home-link {
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid var(--black);
+      white-space: nowrap;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 55px 24px 90px;
+    }
+
+    .report-label {
+      display: inline-block;
+      padding: 5px 11px;
+      background: var(--lime);
+      color: var(--black);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      color: var(--gray);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      font-size: clamp(27px, 5vw, 43px);
+      line-height: 1.4;
+      letter-spacing: -0.035em;
+      font-weight: 900;
+    }
+
+    .lead {
+      font-size: 16px;
+      line-height: 2;
+      color: #333333;
+      margin-bottom: 36px;
+    }
+
+    .conclusion {
+      background: var(--black);
+      color: var(--white);
+      padding: 30px;
+      margin: 35px 0 55px;
+      position: relative;
+    }
+
+    .conclusion::before {
+      content: "VERDICT";
+      display: inline-block;
+      padding: 3px 9px;
+      background: var(--lime);
+      color: var(--black);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+
+    .conclusion h2 {
+      margin: 0 0 15px;
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.6;
+      color: var(--lime);
+    }
+
+    .conclusion p {
+      margin: 0;
+      color: #eeeeee;
+      font-size: 14px;
+    }
+
+    .big-numbers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .number-item {
+      border-top: 1px solid #555555;
+      padding-top: 15px;
+    }
+
+    .number-item strong {
+      display: block;
+      color: var(--lime);
+      font-size: clamp(27px, 5vw, 36px);
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .number-item span {
+      font-size: 12px;
+      color: #cccccc;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--black);
+    }
+
+    .section-heading .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 31px;
+      height: 31px;
+      background: var(--black);
+      color: var(--lime);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.4;
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 900;
+      margin: 30px 0 12px;
+    }
+
+    p {
+      margin: 0 0 18px;
+    }
+
+    .table-note {
+      color: var(--gray);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--border);
+      margin: 20px 0 12px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    th,
+    td {
+      padding: 13px 12px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    thead th {
+      background: var(--black);
+      color: var(--white);
+      font-weight: 800;
+      text-align: right;
+    }
+
+    thead th:first-child {
+      text-align: left;
+    }
+
+    tbody th {
+      text-align: left;
+      background: #f5f5f5;
+      font-weight: 800;
+    }
+
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .dishwasher {
+      background: #f7f9e9;
+    }
+
+    .highlight-row th,
+    .highlight-row td {
+      font-weight: 900;
+      background: #eeeeee;
+    }
+
+    .highlight-row .dishwasher {
+      background: #f0f5d5;
+    }
+
+    .scroll-hint {
+      display: none;
+      font-size: 11px;
+      color: var(--gray);
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    .result-strip {
+      background: var(--light-gray);
+      border-left: 5px solid var(--lime);
+      padding: 19px 22px;
+      margin: 22px 0;
+      font-weight: 700;
+    }
+
+    .result-strip strong {
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .calculation {
+      background: var(--light-gray);
+      padding: 25px;
+      margin: 20px 0;
+    }
+
+    .calculation-label {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+
+    .formula {
+      font-size: clamp(19px, 3vw, 25px);
+      font-weight: 900;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .formula-result {
+      display: inline-block;
+      background: var(--lime);
+      padding: 2px 9px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .scenario {
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .scenario .label {
+      font-size: 12px;
+      color: var(--gray);
+      font-weight: 700;
+    }
+
+    .scenario strong {
+      display: block;
+      font-size: 28px;
+      font-weight: 900;
+      margin: 5px 0;
+    }
+
+    .scenario p {
+      font-size: 12px;
+      margin: 0;
+      color: var(--gray);
+    }
+
+    .note-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: note;
+    }
+
+    .note-list li {
+      counter-increment: note;
+      position: relative;
+      padding: 20px 20px 20px 58px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .note-list li::before {
+      content: counter(note, decimal-leading-zero);
+      position: absolute;
+      left: 10px;
+      top: 19px;
+      font-size: 19px;
+      font-weight: 900;
+      background: var(--lime);
+      padding: 0 5px;
+    }
+
+    .note-list strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .note-list p {
+      margin: 0;
+      font-size: 14px;
+      color: #444444;
+    }
+
+    .source-box {
+      background: var(--light-gray);
+      padding: 24px;
+    }
+
+    .source-box h3 {
+      margin-top: 0;
+      font-size: 15px;
+    }
+
+    .source-box ul {
+      padding-left: 20px;
+      margin: 0 0 20px;
+    }
+
+    .source-box li {
+      margin-bottom: 9px;
+      font-size: 13px;
+    }
+
+    .source-box a {
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .source-small {
+      color: var(--gray);
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .final-message {
+      background: var(--black);
+      color: var(--white);
+      padding: 28px;
+      margin-top: 50px;
+    }
+
+    .final-message strong {
+      color: var(--lime);
+      font-size: 18px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .final-message p {
+      font-size: 14px;
+      margin: 0;
+      color: #dddddd;
+    }
+
+    footer {
+      background: var(--black);
+      color: #cccccc;
+      padding: 35px 20px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    footer .footer-name {
+      color: var(--white);
+      font-weight: 900;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    footer .disclaimer {
+      max-width: 700px;
+      margin: 0 auto 15px;
+    }
+
+    footer .copyright {
+      color: #888888;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+
+      .site-header {
+        padding: 17px 15px;
+      }
+
+      .site-name {
+        font-size: 15px;
+      }
+
+      main {
+        padding: 38px 17px 65px;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+
+      .lead {
+        font-size: 14px;
+      }
+
+      .conclusion {
+        padding: 23px 20px;
+        margin: 30px 0 45px;
+      }
+
+      .conclusion h2 {
+        font-size: 19px;
+      }
+
+      .big-numbers {
+        gap: 10px;
+      }
+
+      .number-item strong {
+        font-size: 27px;
+      }
+
+      .section-heading h2 {
+        font-size: 19px;
+      }
+
+      .scroll-hint {
+        display: block;
+      }
+
+      .scenario-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scenario {
+        padding: 17px;
+      }
+
+      .calculation {
+        padding: 20px 16px;
+      }
+
+      .note-list li {
+        padding-right: 5px;
+      }
+
+      .final-message {
+        padding: 23px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ポータルへの導線 -->
+  <a
+    class="portal-bar"
+    href="https://ai-kenkyubu.github.io/portal/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    AI研究部ポータル TOPへ →
+  </a>
+
+  <!-- ヘッダー -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-name" href="index.html">
+        <span>LAB</span>AI研究部 白黒ラボ
+      </a>
+      <a class="home-link" href="index.html">← トップページ</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- タイトル -->
+    <div class="report-label">REPORT 004｜時間・タイパ</div>
+
+    <div class="eyebrow">DAILY LIFE × COST × TIME</div>
+
+    <h1>
+      食洗機と手洗い、<br>
+      本当に得なのはどっち？<br>
+      公表データで徹底検証
+    </h1>
+
+    <p class="lead">
+      毎日の食器洗い。手洗いのほうが安いのか、それとも食洗機を導入したほうが得なのか。
+      今回はメーカーの公表データを使い、水道代・電気代・ガス代だけでなく、
+      毎日の作業時間まで含めて比較します。
+    </p>
+
+    <!-- 結論 -->
+    <div class="conclusion">
+      <h2>
+        1日1回なら年間約11,200円の節約＆約92時間の時短。
+        ただし本体代の回収には約6年かかる。
+      </h2>
+
+      <p>
+        食洗機は水道・ガス代を抑えながら、毎日の食器洗いにかかる時間を減らせます。
+        ただし、購入費用を光熱費の差額だけで回収するには長い期間が必要です。
+      </p>
+
+      <div class="big-numbers">
+        <div class="number-item">
+          <strong>約11,242円</strong>
+          <span>年間ランニングコストの節約額</span>
+        </div>
+        <div class="number-item">
+          <strong>約92時間</strong>
+          <span>年間の作業時間短縮</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本文・比較 -->
+    <section>
+      <div class="section-heading">
+        <span class="num">01</span>
+        <h2>まずは1回あたりのコストを比較</h2>
+      </div>
+
+      <p>
+        比較対象は、パナソニックの卓上型食洗機「NP-TA4」。
+        メーカーが公表している同条件の基準を使います。
+        食器40点＋小物20点、約5人分を1回で洗う想定です。
+      </p>
+
+      <p>
+        手洗いはお湯を使用するケース。
+        水道・電気・ガスの各料金と、人が実際に作業する時間を比較します。
+      </p>
+
+      <p class="table-note">
+        ※料金はメーカー基準単価に基づく概算です。年間換算は1日1回・365日使用。
+      </p>
+
+      <p class="scroll-hint">← 表は左右にスクロールできます →</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>比較項目</th>
+              <th class="dishwasher">食洗機 1回</th>
+              <th class="dishwasher">食洗機 年間365回</th>
+              <th>手洗い 1回</th>
+              <th>手洗い 年間365回</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>使用水量</th>
+              <td class="dishwasher">約11L</td>
+              <td class="dishwasher">約4,015L（4.0㎥）</td>
+              <td>約75L</td>
+              <td>約27,375L（27.4㎥）</td>
+            </tr>
+            <tr>
+              <th>水道代</th>
+              <td class="dishwasher">約2.9円</td>
+              <td class="dishwasher">約1,059円</td>
+              <td>約19.6円</td>
+              <td>約7,154円</td>
+            </tr>
+            <tr>
+              <th>電気代</th>
+              <td class="dishwasher">約23.9円</td>
+              <td class="dishwasher">約8,724円</td>
+              <td>0円</td>
+              <td>0円</td>
+            </tr>
+            <tr>
+              <th>ガス代（給湯）</th>
+              <td class="dishwasher">0円（水接続時）</td>
+              <td class="dishwasher">0円</td>
+              <td>約38円前後</td>
+              <td>約13,870円</td>
+            </tr>
+            <tr class="highlight-row">
+              <th>水道＋光熱費計</th>
+              <td class="dishwasher">約26.8円</td>
+              <td class="dishwasher">約9,782円</td>
+              <td>約57.6円</td>
+              <td>約21,024円</td>
+            </tr>
+            <tr>
+              <th>人の作業時間</th>
+              <td class="dishwasher">約5分</td>
+              <td class="dishwasher">約30時間</td>
+              <td>約20分</td>
+              <td>約122時間</td>
+            </tr>
+            <tr>
+              <th>機械の稼働時間</th>
+              <td class="dishwasher">約84分（50Hz）</td>
+              <td class="dishwasher">約511時間</td>
+              <td>―</td>
+              <td>―</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="result-strip">
+        年間コスト差は約11,242円。<br>
+        <strong>年間約92時間の作業時間を削減</strong>できます。
+      </div>
+
+      <p>
+        水の使用量は、食洗機が1回約11Lなのに対して手洗いは約75L。
+        約64Lもの差があります。
+        さらに、お湯を使う手洗いでは給湯にガス代がかかります。
+      </p>
+
+      <p>
+        一方、食洗機にも電気代がかかります。
+        水道代とガス代の節約額が電気代を上回るため、
+        今回の条件では食洗機のほうが安くなります。
+      </p>
+    </section>
+
+    <!-- 損益分岐 -->
+    <section>
+      <div class="section-heading">
+        <span class="num">02</span>
+        <h2>本体代は何年で回収できる？</h2>
+      </div>
+
+      <p>
+        食洗機を導入する際には、本体の購入費用が発生します。
+        今回は本体価格を約68,800円として、年間のランニングコスト差額から
+        回収期間を計算します。
+      </p>
+
+      <div class="calculation">
+        <div class="calculation-label">BREAK-EVEN POINT｜損益分岐点</div>
+
+        <div class="formula">
+          68,800円 ÷ 11,242円<br>
+          ＝ <span class="formula-result">約6.12年</span>
+        </div>
+
+        <p style="font-size:13px; color:#666; margin:15px 0 0;">
+          約73ヶ月。1日1回使用する場合の単純計算です。
+        </p>
+      </div>
+
+      <p>
+        つまり、毎日1回使い続けても、光熱費と水道代の差額だけで
+        本体価格を回収するには約6.1年かかります。
+      </p>
+
+      <h3>使用回数が増えると回収は早くなる</h3>
+
+      <div class="scenario-grid">
+        <div class="scenario">
+          <div class="label">1日1回使用</div>
+          <strong>約6.1年</strong>
+          <p>年間差額：約11,242円</p>
+        </div>
+
+        <div class="scenario">
+          <div class="label">1日2回使用</div>
+          <strong>約3.1年</strong>
+          <p>年間差額：約22,484円</p>
+        </div>
+      </div>
+
+      <p style="margin-top:20px;">
+        ただし、これは分岐水栓の購入・工事費や専用洗剤代を含まない試算です。
+        設置環境によっては、回収期間が半年〜1年ほど延びる場合があります。
+      </p>
+
+      <div class="result-strip">
+        食洗機は「すぐに元が取れる節約家電」ではありません。
+        <br>
+        <strong>時間を買う家電</strong>として考えると、評価が変わります。
+      </div>
+    </section>
+
+    <!-- 注意点 -->
+    <section>
+      <div class="section-heading">
+        <span class="num">03</span>
+        <h2>導入前に知っておきたい3つの注意点</h2>
+      </div>
+
+      <ol class="note-list">
+        <li>
+          <strong>「水だけ手洗い」が多い家庭はコスト差が縮む</strong>
+          <p>
+            今回の試算では、手洗い時のお湯を使うガス代が大きな割合を占めています。
+            水だけで洗う家庭では、食洗機に切り替えることで電気代の分だけ
+            光熱費が微増する可能性もあります。
+            資源エネルギー庁の試算では、1日2回使用した場合でも、
+            年間の節約額は約6,470円〜6,790円というケースがあります。
+          </p>
+        </li>
+
+        <li>
+          <strong>設置スペースと分岐水栓の確認が必須</strong>
+          <p>
+            NP-TA4の本体サイズは幅550×奥行344×高さ598mm。
+            ドアを開けたときの奥行は約579mmです。
+            本体の設置スペースだけでなく、ドアの開閉スペースや
+            蛇口の形状、分岐水栓の取り付け可否も確認する必要があります。
+          </p>
+        </li>
+
+        <li>
+          <strong>食器の点数・家族人数によって効率が変わる</strong>
+          <p>
+            食洗機は食器が少なくても、1回あたり約11Lの水と約770Whの電力を使用します。
+            1〜2人暮らしの場合、少量の食器を何度も洗うと優位性が薄れることがあります。
+            ある程度まとめて洗う運用がポイントです。
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 前提と出典 -->
+    <section>
+      <div class="section-heading">
+        <span class="num">04</span>
+        <h2>試算の前提と出典</h2>
+      </div>
+
+      <p>
+        今回の検証では、メーカーおよび公的機関が公開している情報を
+        基礎データとして使用しています。
+        以下の条件をもとに概算しています。
+      </p>
+
+      <div class="source-box">
+        <h3>01｜食洗機の仕様</h3>
+        <ul>
+          <li>
+            メーカー：パナソニック
+          </li>
+          <li>
+            製品：卓上型食器洗い乾燥機 NP-TA4
+          </li>
+          <li>
+            容量：食器40点＋小物20点
+          </li>
+          <li>
+            使用水量：約11L
+          </li>
+          <li>
+            消費電力量：約770Wh
+          </li>
+          <li>
+            運転時間：約84分（50Hz）・約79分（60Hz）
+          </li>
+          <li>
+            標準コース・汚れレベル2
+          </li>
+        </ul>
+
+        <h3>02｜手洗いの比較基準・料金単価</h3>
+        <ul>
+          <li>手洗いの使用水量：約75L</li>
+          <li>手洗いの所要時間：約20分</li>
+          <li>水道料金単価：262円/㎥</li>
+          <li>電気料金単価：31円/kWh</li>
+          <li>都市ガス料金単価：222円/㎥</li>
+        </ul>
+
+        <h3>03｜公的機関の参考試算</h3>
+        <ul>
+          <li>
+            経済産業省 資源エネルギー庁の省エネポータルサイト
+          </li>
+          <li>
+            キッチンの省エネ節約情報
+          </li>
+          <li>
+            給湯器40℃設定・水量65L/回・冷房期間は水洗い想定
+          </li>
+          <li>
+            1日2回の使用で年間約6,470円〜6,790円の節約という試算
+          </li>
+        </ul>
+
+        <h3>参照元</h3>
+        <ul>
+          <li>
+            <a
+              href="https://panasonic.jp/dish/products/NP-TA4.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              パナソニック公式｜食器洗い乾燥機 NP-TA4 仕様・詳細情報
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://panasonic.jp/dish/contents/electricity.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              パナソニック公式｜食洗機の電気代と水道代はいくらかかる？
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://panasonic.jp/dish/contents/merit.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              パナソニック公式｜食洗機のメリット
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.enecho.meti.go.jp/category/saving_and_new/saving/general/howto/kitchen/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              経済産業省 資源エネルギー庁｜省エネポータルサイト（キッチン）
+            </a>
+          </li>
+        </ul>
+
+        <p class="source-small">
+          ※各出典の数値は公表されている標準的な条件に基づきます。
+          実際の料金は地域、契約プラン、季節、使用状況によって異なります。
+          年間換算には1日1回・365日使用という仮定を使用しています。
+        </p>
+      </div>
+    </section>
+
+    <!-- 最終まとめ -->
+    <div class="final-message">
+      <strong>今回の検証結果</strong>
+      <p>
+        食洗機は、必ずしも短期間で本体代を回収できる節約家電ではありません。
+        しかし、お湯を使った手洗いと比べると、年間約11,200円の水道・光熱費削減と
+        約92時間の作業時間短縮が期待できます。
+        <br><br>
+        重要なのは、単純な金額だけでなく、毎日の家事に費やしていた時間を
+        どう評価するか。
+        <br><br>
+        食洗機は「食器洗いを安くする機械」であると同時に、
+        「自由な時間を生み出す機械」と考えるのが現実的です。
+      </p>
+    </div>
+
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <div class="footer-name">AI研究部 白黒ラボ</div>
+
+    <p class="disclaimer">
+      AIを使用して運営しています。価格・料金は調査時点のものです。
+      試算はモデルケースであり、実際の損得は条件によって変わります。
+      特定のサービス・商品を推奨するものではありません。
+    </p>
+
+    <div class="copyright">
+      © 2026 AI研究部 白黒ラボ（AI研究部 HP実験室）
+    </div>
+  </footer>
+
+</body>
+</html>

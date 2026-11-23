@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="シャワーだけの方が安いは本当か？公的データとガス会社の試算をもとに、シャワーと湯船の損益分岐点を検証。">
+  <meta name="theme-color" content="#111111">
+  <title>REPORT 005｜「シャワーだけの方が安い」は本当か？｜AI研究部 白黒ラボ</title>
+
+  <style>
+    :root {
+      --black: #111111;
+      --dark: #1b1b1b;
+      --gray-900: #292929;
+      --gray-700: #555555;
+      --gray-500: #858585;
+      --gray-300: #d4d4d4;
+      --gray-200: #e8e8e8;
+      --gray-100: #f4f4f4;
+      --white: #ffffff;
+      --lime: #E8FF47;
+      --font: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+              "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+              Meiryo, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font);
+      line-height: 1.85;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      opacity: .7;
+    }
+
+    .portal-bar {
+      background: var(--black);
+      color: var(--lime);
+      padding: 11px 20px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .portal-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .site-header {
+      border-bottom: 1px solid var(--gray-200);
+      padding: 23px 20px;
+    }
+
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .site-logo {
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+
+    .site-logo span {
+      display: inline-block;
+      background: var(--lime);
+      padding: 1px 5px;
+      margin-right: 5px;
+    }
+
+    .header-link {
+      font-size: 12px;
+      font-weight: 800;
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 3px;
+      white-space: nowrap;
+    }
+
+    .container {
+      width: min(100% - 40px, 820px);
+      margin: 0 auto;
+    }
+
+    .article-header {
+      padding-top: 62px;
+      padding-bottom: 35px;
+    }
+
+    .report-label {
+      display: inline-block;
+      background: var(--lime);
+      padding: 5px 11px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(27px, 5vw, 42px);
+      font-weight: 900;
+      letter-spacing: -.045em;
+      line-height: 1.45;
+      margin: 0 0 22px;
+    }
+
+    .article-meta {
+      color: var(--gray-500);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 13px;
+    }
+
+    .conclusion {
+      background: var(--black);
+      color: var(--white);
+      padding: 32px;
+      margin: 0 0 48px;
+      position: relative;
+    }
+
+    .conclusion-label {
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .15em;
+      margin-bottom: 13px;
+    }
+
+    .conclusion h2 {
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.35;
+      font-weight: 900;
+      margin: 0 0 17px;
+    }
+
+    .conclusion h2 strong {
+      color: var(--lime);
+    }
+
+    .conclusion p {
+      color: #d2d2d2;
+      font-size: 14px;
+      margin: 0;
+      line-height: 1.9;
+    }
+
+    .main-section {
+      margin-bottom: 58px;
+    }
+
+    .section-heading {
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.5;
+      letter-spacing: -.03em;
+      border-left: 6px solid var(--black);
+      padding-left: 15px;
+      margin: 0 0 23px;
+    }
+
+    .section-number {
+      display: block;
+      color: var(--gray-500);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .15em;
+      margin-bottom: 4px;
+    }
+
+    .intro-text {
+      font-size: 15px;
+      line-height: 2.1;
+      color: var(--gray-900);
+    }
+
+    .highlight {
+      background: linear-gradient(transparent 60%, var(--lime) 60%);
+      font-weight: 900;
+    }
+
+    .table-caption {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      width: 100%;
+      border: 1px solid var(--gray-300);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 590px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    th, td {
+      padding: 15px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-200);
+      vertical-align: middle;
+    }
+
+    th {
+      background: var(--black);
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    th:first-child {
+      width: 25%;
+    }
+
+    td:first-child {
+      font-weight: 800;
+      background: var(--gray-100);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table-note {
+      margin-top: 13px;
+      padding: 16px 18px;
+      background: var(--gray-100);
+      border-left: 4px solid var(--lime);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .table-note strong {
+      font-weight: 900;
+    }
+
+    .zones {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .zone {
+      border: 1px solid var(--gray-300);
+      padding: 23px;
+      position: relative;
+    }
+
+    .zone-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .zone-label {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .zone-time {
+      font-size: 12px;
+      font-weight: 900;
+      background: var(--gray-100);
+      padding: 4px 9px;
+      white-space: nowrap;
+    }
+
+    .zone h3 {
+      margin: 0 0 9px;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .zone p {
+      color: var(--gray-700);
+      font-size: 13px;
+      margin: 0;
+      line-height: 1.9;
+    }
+
+    .zone-cheap {
+      border-left: 6px solid #888;
+    }
+
+    .zone-border {
+      border-left: 6px solid var(--gray-500);
+    }
+
+    .zone-expensive {
+      border-left: 6px solid var(--black);
+      background: var(--gray-100);
+    }
+
+    .zone-expensive .zone-time {
+      background: var(--lime);
+    }
+
+    .warning-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: warning;
+    }
+
+    .warning-list li {
+      counter-increment: warning;
+      padding: 19px 0 19px 51px;
+      border-bottom: 1px solid var(--gray-200);
+      position: relative;
+    }
+
+    .warning-list li:last-child {
+      border-bottom: none;
+    }
+
+    .warning-list li::before {
+      content: counter(warning, decimal-leading-zero);
+      position: absolute;
+      top: 19px;
+      left: 0;
+      font-size: 17px;
+      font-weight: 900;
+      background: var(--lime);
+      padding: 0 6px;
+      line-height: 1.7;
+    }
+
+    .warning-list strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .warning-list p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.9;
+    }
+
+    .source-box {
+      background: var(--gray-100);
+      padding: 25px;
+    }
+
+    .source-box h3 {
+      font-size: 15px;
+      font-weight: 900;
+      margin: 0 0 12px;
+    }
+
+    .source-list {
+      margin: 0;
+      padding-left: 19px;
+    }
+
+    .source-list li {
+      padding: 5px 0;
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.8;
+    }
+
+    .source-list strong {
+      color: var(--black);
+    }
+
+    .assumption {
+      margin-top: 22px;
+      border-top: 1px solid var(--gray-300);
+      padding-top: 17px;
+    }
+
+    .assumption h3 {
+      margin-bottom: 8px;
+    }
+
+    .assumption p {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.9;
+      margin: 0;
+    }
+
+    .final-verdict {
+      background: var(--lime);
+      padding: 24px;
+      margin: 0 0 65px;
+    }
+
+    .final-verdict .small {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .15em;
+    }
+
+    .final-verdict p {
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1.7;
+      margin: 7px 0 0;
+    }
+
+    .site-footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 37px 20px;
+    }
+
+    .footer-inner {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .footer-logo span {
+      color: var(--lime);
+    }
+
+    .footer-notice {
+      font-size: 11px;
+      line-height: 1.9;
+      color: #bdbdbd;
+      margin: 0 0 22px;
+    }
+
+    .copyright {
+      border-top: 1px solid #414141;
+      padding-top: 17px;
+      font-size: 10px;
+      color: #888;
+      letter-spacing: .04em;
+    }
+
+    @media (min-width: 700px) {
+      .zones {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .zone-expensive {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+
+      .portal-bar {
+        padding: 10px 16px;
+      }
+
+      .site-header {
+        padding: 18px 16px;
+      }
+
+      .site-logo {
+        font-size: 16px;
+      }
+
+      .header-link {
+        font-size: 11px;
+      }
+
+      .container {
+        width: calc(100% - 36px);
+      }
+
+      .article-header {
+        padding-top: 42px;
+      }
+
+      .conclusion {
+        padding: 25px 21px;
+        margin-bottom: 40px;
+      }
+
+      .main-section {
+        margin-bottom: 45px;
+      }
+
+      .section-heading {
+        font-size: 20px;
+      }
+
+      .zone {
+        padding: 19px;
+      }
+
+      .zone h3 {
+        font-size: 18px;
+      }
+
+      .source-box {
+        padding: 20px;
+      }
+
+      .final-verdict p {
+        font-size: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ① ポータルリンク -->
+  <div class="portal-bar">
+    <div class="portal-inner">
+      <a href="https://ai-kenkyubu.github.io/portal/">
+        AI研究部ポータル TOPへ →
+      </a>
+    </div>
+  </div>
+
+  <!-- ② ヘッダー -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-logo" href="index.html">
+        <span>白黒</span>AI研究部 白黒ラボ
+      </a>
+      <a class="header-link" href="index.html">
+        LAB TOP →
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ③ レポートラベル -->
+    <!-- ④ タイトル -->
+    <section class="article-header">
+      <div class="report-label">REPORT 005｜生活の通説</div>
+
+      <h1>
+        「シャワーだけの方が安い」は本当か？<br>
+        公的データとガス会社試算で損益分岐点を白黒つける
+      </h1>
+
+      <div class="article-meta">
+        AI RESEARCH REPORT / 005
+      </div>
+    </section>
+
+    <!-- ⑤ 結論ボックス -->
+    <section class="conclusion">
+      <div class="conclusion-label">VERDICT｜検証結果</div>
+
+      <h2>
+        損益分岐点は<br>
+        <strong>シャワー合計 約17分。</strong>
+      </h2>
+
+      <p>
+        1人で短時間ならシャワー、家族での入浴や長風呂なら湯船にお湯を張る方が安くなります。
+        「シャワーの方が節約になる」とは一概には言えません。
+      </p>
+    </section>
+
+    <!-- 導入 -->
+    <section class="main-section">
+      <h2 class="section-heading">
+        <span class="section-number">01 / INTRODUCTION</span>
+        そもそも、シャワーは本当に安いのか？
+      </h2>
+
+      <p class="intro-text">
+        「節約のために湯船を溜めずシャワーで済ませる」という行動は、
+        実は入浴時間と人数によって逆効果になるケースがあります。
+        公的機関やガス会社が公表している基準値をもとに、
+        1回あたりの水量とガス代（給湯コスト）を検証しました。
+      </p>
+
+      <p class="intro-text">
+        今回の比較対象は、<span class="highlight">シャワー15分間</span>と
+        <span class="highlight">浴槽1杯分（200L）</span>。
+        水量だけでなく、実際にお湯を作るための給湯コストにも注目します。
+      </p>
+    </section>
+
+    <!-- ⑥ 比較表 -->
+    <section class="main-section">
+      <h2 class="section-heading">
+        <span class="section-number">02 / DATA COMPARISON</span>
+        シャワー15分 vs 湯船1回
+      </h2>
+
+      <p class="table-caption">
+        ▼ 1回あたりの使用量・給湯コストの比較
+      </p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>比較項目</th>
+              <th>シャワーのみ（15分）</th>
+              <th>湯船にお湯を張る（1回・200L）</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>使用水量</td>
+              <td>約150L〜180L<br>（10〜12L/分）</td>
+              <td>約180L〜200L</td>
+            </tr>
+
+            <tr>
+              <td>ガス代<br>（都市ガス）</td>
+              <td>約75円〜80円</td>
+              <td>約80円〜90円</td>
+            </tr>
+
+            <tr>
+              <td>ガス代<br>（LPガス）</td>
+              <td>約150円〜200円</td>
+              <td>約150円〜240円</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-note">
+        <strong>POINT｜水量の境界線</strong><br>
+        家庭用シャワーの流量を12L/分とすると、
+        16〜17分流し続けた場合、使用水量は約192L〜204Lに達します。
+        これは浴槽1杯分（約200L）とほぼ同じ水量です。
+      </div>
+
+      <p class="intro-text">
+        つまり、シャワーの時間が長くなるほど節約効果は小さくなります。
+        さらに複数人でシャワーを使う場合は、合計時間で考える必要があります。
+      </p>
+    </section>
+
+    <!-- ⑦ 3ゾーン判定 -->
+    <section class="main-section">
+      <h2 class="section-heading">
+        <span class="section-number">03 / THREE ZONE ANALYSIS</span>
+        あなたの入浴スタイルはどのゾーン？
+      </h2>
+
+      <p class="intro-text">
+        判断の基準は、家族全員のシャワー使用時間を合計した時間です。
+        3つのゾーンに分けて判定します。
+      </p>
+
+      <div class="zones">
+
+        <!-- シャワーが安い -->
+        <article class="zone zone-cheap">
+          <div class="zone-top">
+            <span class="zone-label">ZONE 01｜SHOWER</span>
+            <span class="zone-time">合計15分未満</span>
+          </div>
+
+          <h3>シャワーが安いゾーン</h3>
+
+          <p>
+            <strong>1人暮らし・短時間派</strong><br>
+            1人で10〜15分以内に浴び終わるなら、
+            シャワーのみの方が水量・ガス代ともに安い傾向です。
+            湯船を使わない方が合理的なケースです。
+          </p>
+        </article>
+
+        <!-- ボーダー -->
+        <article class="zone zone-border">
+          <div class="zone-top">
+            <span class="zone-label">ZONE 02｜BORDER</span>
+            <span class="zone-time">合計16〜17分前後</span>
+          </div>
+
+          <h3>ほぼ互角のボーダーゾーン</h3>
+
+          <p>
+            <strong>1人長風呂・2人暮らし</strong><br>
+            1人で17分前後出しっぱなし、
+            または2人で約8分ずつなら湯船1杯分とコストがほぼ並びます。
+            このあたりが損益分岐点です。
+          </p>
+        </article>
+
+        <!-- 湯船が安い -->
+        <article class="zone zone-expensive">
+          <div class="zone-top">
+            <span class="zone-label">ZONE 03｜BATH</span>
+            <span class="zone-time">合計18分以上</span>
+          </div>
+
+          <h3>湯船が安いゾーン</h3>
+
+          <p>
+            <strong>2人以上の家族・長風呂派</strong><br>
+            家族3〜4人がそれぞれシャワーを浴びると、
+            合計20〜40分に達することもあります。
+            その場合は湯船にお湯を張って共有した方が、
+            光熱費・水道代を抑えられる可能性があります。
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ⑧ 注意点 -->
+    <section class="main-section">
+      <h2 class="section-heading">
+        <span class="section-number">04 / CAUTION</span>
+        ただし、この3点には注意
+      </h2>
+
+      <ol class="warning-list">
+
+        <li>
+          <strong>「追い焚き」や「湯船＋シャワー」は別途コスト</strong>
+          <p>
+            今回の湯船の数値は、お湯張り1回分のみです。
+            追い焚きが必要な場合は追加コストが発生します。
+            例えば200Lのお湯を20℃温め直す場合、
+            都市ガスで約85円前後が目安です。
+          </p>
+        </li>
+
+        <li>
+          <strong>プロパンガス（LPガス）は金額差が大きく開く</strong>
+          <p>
+            LPガスは都市ガスより単価が高い場合があり、
+            使用量が増えたときの料金への影響も大きくなります。
+            LPガスを利用している家庭ほど、
+            入浴時間の見直しによる節約効果が高くなる可能性があります。
+          </p>
+        </li>
+
+        <li>
+          <strong>季節（水温）によってガス代は大きく変動する</strong>
+          <p>
+            水温は夏が約25℃、冬が約5〜10℃となることがあり、
+            15℃以上の差が生じます。
+            冬場は同じ水量でも設定温度まで温めるために
+            より多くのエネルギーが必要になり、ガス代が高くなります。
+          </p>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- ⑨ 前提と出典 -->
+    <section class="main-section">
+      <h2 class="section-heading">
+        <span class="section-number">05 / SOURCES & ASSUMPTIONS</span>
+        試算の前提と出典
+      </h2>
+
+      <div class="source-box">
+
+        <h3>参考にした公的データ・企業資料</h3>
+
+        <ul class="source-list">
+          <li>
+            <strong>経済産業省 資源エネルギー庁</strong><br>
+            省エネポータルサイト「無理のない省エネ節約」。
+            シャワー流量12L/分を基準として参照。
+          </li>
+
+          <li>
+            <strong>東京都水道局</strong><br>
+            「節水にご協力を」。
+            シャワー3分で36L（12L/分）、
+            浴槽の残り湯約180Lを基準として参照。
+          </li>
+
+          <li>
+            <strong>東京ガス</strong><br>
+            「ウチコト」／「給湯器の光熱費を節約する方法」。
+            シャワー10〜12L/分、
+            シャワー17分＝浴槽1杯200Lを基準として参照。
+          </li>
+
+          <li>
+            <strong>ENECHANGE（エネチェンジ）</strong><br>
+            都市ガス・LPガス別の給湯コスト試算値を参考に比較。
+          </li>
+        </ul>
+
+        <div class="assumption">
+          <h3>試算条件</h3>
+
+          <p>
+            ・水温：20℃<br>
+            ・給湯温度：40〜45℃<br>
+            ・給湯器の熱効率：80％前後<br>
+            ・シャワー流量：10〜12L/分<br>
+            ・浴槽容量：約200L<br>
+            ・比較単位：1回の入浴にかかる水量・給湯コスト
+          </p>
+
+          <p style="margin-top:12px;">
+            ※ガス代は参考値であり、実際の契約単価、給湯器の性能、
+            水温、地域の水道料金などによって変動します。
+            比較表は各資料の基準値をもとにしたモデルケースです。
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 最終判定 -->
+    <section class="final-verdict">
+      <div class="small">FINAL VERDICT｜白黒判定</div>
+
+      <p>
+        「シャワーだけの方が安い」は半分正解。<br>
+        重要なのは人数と合計使用時間。<br>
+        17分を超えるなら、湯船も選択肢に入れるべき。
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ⑩ フッター -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <div class="footer-logo">
+        <span>■</span> AI研究部 白黒ラボ
+      </div>
+
+      <p class="footer-notice">
+        AIを使用して運営しています。価格・料金は調査時点のものです。
+        試算はモデルケースであり、実際の損得は条件によって変わります。
+        特定のサービス・商品を推奨するものではありません。
+      </p>
+
+      <div class="copyright">
+        © 2026 AI研究部 白黒ラボ（AI研究部 HP実験室）
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

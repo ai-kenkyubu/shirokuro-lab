@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="100均の単3アルカリ乾電池とパナソニック エボルタNEOを実測データで比較。1円あたりの稼働時間と用途別の最適な使い分けを検証します。">
+  <title>100均の単3乾電池とエボルタNEO、本当にコスパが良いのはどっち？｜AI研究部 白黒ラボ</title>
+
+  <style>
+    :root {
+      --black: #111111;
+      --dark: #222222;
+      --gray: #666666;
+      --light-gray: #eeeeee;
+      --border: #dddddd;
+      --white: #ffffff;
+      --lime: #E8FF47;
+      --max-width: 900px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: var(--black);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        Meiryo,
+        sans-serif;
+      line-height: 1.85;
+      overflow-wrap: break-word;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .portal-bar {
+      background: var(--black);
+      color: var(--lime);
+      text-align: center;
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .portal-bar a {
+      color: var(--lime);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .portal-bar a:hover {
+      opacity: 0.7;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 22px 20px;
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .site-name {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .site-name span {
+      display: block;
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.16em;
+      font-weight: 700;
+    }
+
+    .home-link {
+      text-decoration: none;
+      border: 1px solid var(--black);
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: 0.2s;
+    }
+
+    .home-link:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 45px 24px 70px;
+      background: var(--white);
+      min-height: 100vh;
+    }
+
+    .report-label {
+      display: inline-block;
+      background: var(--lime);
+      color: var(--black);
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(27px, 5vw, 42px);
+      line-height: 1.45;
+      letter-spacing: -0.045em;
+      font-weight: 900;
+      margin: 0 0 28px;
+    }
+
+    .intro {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 34px;
+    }
+
+    .conclusion {
+      background: var(--black);
+      color: var(--white);
+      padding: 28px 30px;
+      margin: 35px 0 45px;
+      border-left: 6px solid var(--lime);
+    }
+
+    .conclusion-label {
+      color: var(--lime);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .conclusion h2 {
+      color: var(--lime);
+      font-size: clamp(21px, 4vw, 29px);
+      line-height: 1.5;
+      margin: 0 0 15px;
+      font-weight: 900;
+    }
+
+    .conclusion p {
+      font-size: 14px;
+      margin: 0;
+      color: #eeeeee;
+    }
+
+    .conclusion strong {
+      color: var(--lime);
+    }
+
+    section {
+      margin-top: 55px;
+    }
+
+    h2.section-title {
+      font-size: 23px;
+      line-height: 1.5;
+      font-weight: 900;
+      border-bottom: 3px solid var(--black);
+      padding-bottom: 12px;
+      margin: 0 0 23px;
+      letter-spacing: -0.03em;
+    }
+
+    h2.section-title::before {
+      content: "";
+      display: inline-block;
+      width: 9px;
+      height: 22px;
+      background: var(--lime);
+      margin-right: 11px;
+      vertical-align: -3px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.5;
+      margin: 30px 0 12px;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 0 0 17px;
+    }
+
+    .table-caption {
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--border);
+      margin: 18px 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 650px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    th, td {
+      padding: 14px 15px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    thead th {
+      background: var(--black);
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    thead th:first-child {
+      background: #333;
+    }
+
+    tbody th {
+      background: #f0f0f0;
+      font-weight: 800;
+      width: 25%;
+    }
+
+    tbody tr:last-child td,
+    tbody tr:last-child th {
+      border-bottom: none;
+    }
+
+    .highlight-cell {
+      background: #f6ffd0;
+      font-weight: 900;
+    }
+
+    .reference-cell {
+      font-weight: 800;
+    }
+
+    .table-note {
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 8px;
+    }
+
+    .zone {
+      border: 1px solid var(--border);
+      margin: 20px 0;
+      padding: 23px;
+      background: #fafafa;
+    }
+
+    .zone-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .zone-number {
+      background: var(--black);
+      color: var(--lime);
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .zone h3 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .zone p {
+      margin-bottom: 10px;
+    }
+
+    .zone p:last-child {
+      margin-bottom: 0;
+    }
+
+    .zone-label {
+      display: inline-block;
+      background: var(--lime);
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 900;
+      margin-right: 5px;
+    }
+
+    .device-list {
+      color: #444;
+      font-size: 13px;
+    }
+
+    .warning-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: warning;
+    }
+
+    .warning-list li {
+      counter-increment: warning;
+      position: relative;
+      padding: 17px 15px 17px 53px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .warning-list li:last-child {
+      border-bottom: none;
+    }
+
+    .warning-list li::before {
+      content: counter(warning, decimal-leading-zero);
+      position: absolute;
+      left: 10px;
+      top: 17px;
+      font-size: 15px;
+      font-weight: 900;
+      background: var(--lime);
+      padding: 1px 5px;
+    }
+
+    .warning-list strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .source-box {
+      background: #f2f2f2;
+      padding: 23px;
+      border-left: 4px solid var(--black);
+    }
+
+    .source-box h3 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+
+    .source-box p {
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .source-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .source-list {
+      padding-left: 20px;
+      font-size: 13px;
+      margin: 8px 0 0;
+    }
+
+    .source-list li {
+      margin-bottom: 8px;
+    }
+
+    .disclaimer-box {
+      background: #f8f8f8;
+      border: 1px solid var(--border);
+      padding: 18px;
+      margin-top: 45px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .footer-notice {
+      color: #cccccc;
+      font-size: 11px;
+      line-height: 1.9;
+      max-width: 700px;
+      margin: 0 auto 22px;
+    }
+
+    .copyright {
+      border-top: 1px solid #444;
+      padding-top: 20px;
+      font-size: 11px;
+      color: #aaaaaa;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 17px 15px;
+      }
+
+      .site-name {
+        font-size: 17px;
+      }
+
+      .home-link {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+
+      main {
+        padding: 32px 17px 55px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .intro {
+        font-size: 14px;
+      }
+
+      .conclusion {
+        padding: 22px 19px;
+      }
+
+      .conclusion h2 {
+        font-size: 22px;
+      }
+
+      h2.section-title {
+        font-size: 20px;
+      }
+
+      .zone {
+        padding: 17px;
+      }
+
+      .zone h3 {
+        font-size: 17px;
+      }
+
+      .source-box {
+        padding: 17px;
+      }
+
+      section {
+        margin-top: 45px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- AI研究部ポータルへの導線 -->
+  <div class="portal-bar">
+    <a href="https://ai-kenkyubu.github.io/portal/">
+      AI研究部ポータル TOPへ →
+    </a>
+  </div>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-inner">
+      <div class="site-name">
+        AI研究部 白黒ラボ
+        <span>日常のモヤモヤ数値化研究所</span>
+      </div>
+
+      <a class="home-link" href="index.html">
+        LAB TOP →
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- レポートタイトル -->
+    <div class="report-label">
+      REPORT 003 ｜ 買い物・スペック
+    </div>
+
+    <h1>
+      100均の単3乾電池とエボルタNEO、本当にコスパが良いのはどっち？実測データで白黒つけてみた
+    </h1>
+
+    <p class="intro">
+      乾電池は、どこで買っても同じように見える消耗品。
+      しかし、価格と稼働時間を数字で比較すると、意外な差が見えてきます。
+      今回は100円ショップのアルカリ乾電池とパナソニック「エボルタNEO」を、
+      同じ放電条件で測定した実測データから比較。
+      本当にお得なのはどちらなのか、白黒つけてみます。
+    </p>
+
+    <!-- 結論ボックス -->
+    <div class="conclusion">
+      <div class="conclusion-label">CONCLUSION / 検証結果</div>
+
+      <h2>
+        1円あたりの稼働時間は<br>
+        「100均」が約3.9倍お得。
+      </h2>
+
+      <p>
+        エボルタNEOは100均電池より約1.28倍長持ちしますが、
+        価格は約4.9倍。純粋な時間単価では100均が圧勝です。
+        <br><br>
+        ただし、<strong>長期間入れっぱなしにする機器や防災備蓄はメーカー品一択。</strong>
+        普段使いは100均、長期保管はエボルタNEOという使い分けが合理的です。
+      </p>
+    </div>
+
+    <!-- 比較データ -->
+    <section>
+      <h2 class="section-title">
+        01｜実測データで比較する
+      </h2>
+
+      <p>
+        今回の比較では、単3形アルカリ乾電池を1本ずつ取り出し、
+        同一の放電試験条件で連続放電させた実測時間を使用します。
+        価格だけでなく、1円あたり何時間使えるのかという
+        「時間単価」に注目します。
+      </p>
+
+      <div class="table-caption">
+        実測データ比較表｜単3形アルカリ乾電池・1本あたり換算
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>比較項目</th>
+              <th>100均アルカリ<br>（4本110円）</th>
+              <th>エボルタNEO<br>（4本約540円）</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th>1本あたりの単価</th>
+              <td class="highlight-cell">27.5円</td>
+              <td>約135円</td>
+            </tr>
+
+            <tr>
+              <th>連続放電の持続時間</th>
+              <td>約3.00時間<br>（180分02秒）</td>
+              <td>約3.83時間<br>（229分40秒）</td>
+            </tr>
+
+            <tr>
+              <th>持続時間の倍率</th>
+              <td>基準（1.0倍）</td>
+              <td>約1.28倍長持ち</td>
+            </tr>
+
+            <tr>
+              <th>1円あたりの持続時間</th>
+              <td class="highlight-cell">
+                約0.109時間<br>（約6.5分）
+              </td>
+              <td>
+                約0.028時間<br>（約1.7分）
+              </td>
+            </tr>
+
+            <tr>
+              <th>1円あたりのコスパ比</th>
+              <td class="highlight-cell">
+                約3.9倍お得
+              </td>
+              <td>基準（1.0倍）</td>
+            </tr>
+
+            <tr>
+              <th>使用推奨期限の目安</th>
+              <td>約5年</td>
+              <td>10年</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="table-note">
+        ※表はスマートフォンで左右にスクロールできます。
+        ※価格は1本あたりに換算した試算値です。
+        ※実測時間は2.2Ω負荷・終止電圧0.9Vの連続放電試験によるものです。
+      </p>
+
+      <h3>価格差を埋めるほどの性能差はある？</h3>
+
+      <p>
+        エボルタNEOの持続時間は約229分40秒。
+        100均電池の約180分02秒と比べると、約49分38秒長く使えます。
+      </p>
+
+      <p>
+        しかし、価格は100均の27.5円に対してエボルタNEOは約135円。
+        約4.9倍の価格差があります。
+        持続時間は約1.28倍しか伸びないため、
+        時間単価で計算すると100均電池の方が圧倒的に有利です。
+      </p>
+
+      <p>
+        つまり、連続放電という条件で純粋なコストパフォーマンスを
+        求めるなら、100均電池を選ぶのが合理的です。
+      </p>
+    </section>
+
+    <!-- 使い分け -->
+    <section>
+      <h2 class="section-title">
+        02｜結局、どれを買えばいい？3つの使い分け
+      </h2>
+
+      <p>
+        ただし、乾電池はすべて同じ使い方をするわけではありません。
+        交換頻度や保管期間を考慮すると、最適な選択肢は3つに分かれます。
+      </p>
+
+      <div class="zone">
+        <div class="zone-header">
+          <div class="zone-number">01</div>
+          <h3>100均ゾーン｜日常の消耗品</h3>
+        </div>
+
+        <p>
+          <span class="zone-label">おすすめ</span>
+          数週間〜数ヶ月で電池を使い切る機器
+        </p>
+
+        <p class="device-list">
+          対象：ワイヤレスマウス・キーボード、電動歯ブラシ、
+          携帯扇風機、子ども用おもちゃ、LEDランタンなど
+        </p>
+
+        <p>
+          <strong>理由：</strong>
+          経年劣化が進む前に使い切ることができるなら、
+          1円あたり約3.9倍という単価の安さが大きなメリットになります。
+          頻繁に交換する機器ほど、購入価格の差が効いてきます。
+        </p>
+      </div>
+
+      <div class="zone">
+        <div class="zone-header">
+          <div class="zone-number">02</div>
+          <h3>メーカー品ゾーン｜長期放置・防災備蓄</h3>
+        </div>
+
+        <p>
+          <span class="zone-label">おすすめ</span>
+          1年以上入れっぱなしにする機器・防災用
+        </p>
+
+        <p class="device-list">
+          対象：テレビのリモコン、掛け時計、体重計、
+          防災用懐中電灯、防災ラジオなど
+        </p>
+
+        <p>
+          <strong>理由：</strong>
+          長期間交換しない機器では、使用推奨期限や液漏れリスクが重要になります。
+          100均電池の使用推奨期限の目安は約5年。
+          一方、エボルタNEOは10年保存に対応し、
+          液漏れ防止製法も採用されています。
+        </p>
+
+        <p>
+          数年間放置する可能性がある機器や、
+          いざというときに確実に使いたい防災用品では、
+          価格差よりも長期保存性能を優先する価値があります。
+        </p>
+      </div>
+
+      <div class="zone">
+        <div class="zone-header">
+          <div class="zone-number">03</div>
+          <h3>充電池ゾーン｜交換頻度の高い機器</h3>
+        </div>
+
+        <p>
+          <span class="zone-label">おすすめ</span>
+          週1回以上電池交換するヘビーユース機器
+        </p>
+
+        <p class="device-list">
+          対象：ゲーム機のコントローラー、ストロボ、
+          無線機、ラジコンなど
+        </p>
+
+        <p>
+          <strong>理由：</strong>
+          交換頻度が高い場合は、毎回乾電池を購入するよりも
+          エネループなどの充電池を使った方が、
+          長期的なトータルコストを抑えられる可能性があります。
+        </p>
+
+        <p>
+          初期費用は必要ですが、繰り返し充電して使用できるため、
+          使用頻度が高い人ほど検討する価値があります。
+        </p>
+      </div>
+    </section>
+
+    <!-- 注意点 -->
+    <section>
+      <h2 class="section-title">
+        03｜検証結果を見るときの注意点
+      </h2>
+
+      <p>
+        今回の数字は便利な比較材料ですが、
+        実際の使用環境にそのまま当てはめられるわけではありません。
+        特に次の3点には注意が必要です。
+      </p>
+
+      <ul class="warning-list">
+        <li>
+          <strong>連続放電試験と実使用では寿命が違う</strong>
+          リモコンなどの実使用時間は、表の数値よりはるかに長くなります。
+          今回の連続放電試験は電池に一定の負荷をかけ続ける過酷なテストです。
+          微小電流で動作する機器では寿命が数ヶ月〜数年になる場合もあります。
+          そのため、今回のコスパ比率はあくまで比較の目安として参照してください。
+        </li>
+
+        <li>
+          <strong>使用推奨期限と自然放電に注意</strong>
+          100均電池の使用推奨期限は製造から5年程度が一般的です。
+          安いからといって大量にまとめ買いし、
+          長期間ストックすると、容量低下や性能劣化が起きる可能性があります。
+          購入時には使用推奨期限を確認しましょう。
+        </li>
+
+        <li>
+          <strong>異なる銘柄・新旧の電池を混ぜない</strong>
+          新しい電池と古い電池、異なるメーカーや銘柄の電池を
+          混ぜて使うのは避けましょう。
+          電池の過放電などによって、液漏れや破裂につながるおそれがあります。
+          交換するときは、すべてまとめて新しいものに交換してください。
+        </li>
+      </ul>
+    </section>
+
+    <!-- 前提と出典 -->
+    <section>
+      <h2 class="section-title">
+        04｜試算の前提と出典
+      </h2>
+
+      <div class="source-box">
+
+        <h3>■ 実測データの出典</h3>
+
+        <p>
+          実測持続時間は、mitok（ミトク）の「ガチ検証」シリーズで
+          公開されている単3形アルカリ乾電池の連続放電テストを参照しています。
+        </p>
+
+        <p>
+          試験条件は2.2Ωセメント抵抗負荷、
+          終止電圧0.9Vまでの連続放電です。
+        </p>
+
+        <ul class="source-list">
+          <li>
+            <strong>100均代表値：</strong>
+            セリア「ALKALINE PAIRDEER（4本入り）」
+            実測180分02秒
+          </li>
+          <li>
+            <strong>参考データ：</strong>
+            ダイソー「DAISO&HW ハイパワー」
+            実測175分50秒
+          </li>
+          <li>
+            <strong>メーカー品代表値：</strong>
+            パナソニック「エボルタNEO」
+            実測229分40秒
+          </li>
+        </ul>
+
+        <h3>■ 価格の前提</h3>
+
+        <p>
+          <strong>100円ショップ：</strong>
+          4本入り税込110円として計算。
+          1本あたり27.5円。
+        </p>
+
+        <p>
+          <strong>エボルタNEO：</strong>
+          4本パック（LR6NJ/4B・4SE）の価格.com掲載実売価格
+          税込509〜579円の中央値540円を採用。
+          1本あたり135円。
+        </p>
+
+        <h3>■ 計算方法</h3>
+
+        <p>
+          1円あたりの持続時間は、
+          「1本あたりの持続時間（時間）÷1本あたりの価格（円）」
+          で算出しています。
+        </p>
+
+        <p>
+          100均電池：約3.00時間 ÷ 27.5円 ≒ 0.109時間／円
+        </p>
+
+        <p>
+          エボルタNEO：約3.83時間 ÷ 135円 ≒ 0.028時間／円
+        </p>
+
+        <p>
+          コスパ比率は、それぞれの1円あたりの持続時間を比較し、
+          100均電池がエボルタNEOの約3.9倍となる計算です。
+        </p>
+
+        <h3>■ 試算上の補足</h3>
+
+        <p>
+          価格や使用推奨期限は販売時期・店舗・製造時期などによって変動します。
+          また、連続放電試験の結果は、実際の機器における使用時間や
+          液漏れの発生率を直接示すものではありません。
+        </p>
+
+      </div>
+    </section>
+
+    <!-- 最終まとめ -->
+    <section>
+      <h2 class="section-title">
+        05｜白黒ラボの最終判定
+      </h2>
+
+      <p>
+        今回の検証では、純粋な時間単価なら100均電池が約3.9倍お得という結果になりました。
+        エボルタNEOの方が長持ちするのは事実ですが、
+        その性能差は価格差を埋めるほどではありません。
+      </p>
+
+      <p>
+        ただし、乾電池の価値は稼働時間だけでは決まりません。
+        長期保管性能や液漏れ防止性能が重要になる用途では、
+        メーカー品を選ぶ合理性があります。
+      </p>
+
+      <p>
+        <strong>
+          普段使いは100均。長期放置・防災備蓄はエボルタNEO。
+          交換頻度が高いなら充電池。
+        </strong>
+      </p>
+
+      <p>
+        価格だけで決めるのではなく、
+        「いつ使うか」「どれくらい放置するか」で選ぶ。
+        これが今回の検証で見えてきた、最も合理的な乾電池の選び方です。
+      </p>
+    </section>
+
+    <!-- 注意書き -->
+    <div class="disclaimer-box">
+      <strong>検証について：</strong>
+      本レポートは公開されている実測データと販売価格をもとにした比較・試算です。
+      すべての製品・使用環境で同じ結果になることを保証するものではありません。
+    </div>
+
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <div class="footer-inner">
+
+      <p class="footer-notice">
+        AIを使用して運営しています。価格・料金は調査時点のものです。
+        試算はモデルケースであり、実際の損得は条件によって変わります。
+        特定のサービス・商品を推奨するものではありません。
+      </p>
+
+      <div class="copyright">
+        © 2026 AI研究部 白黒ラボ（AI研究部 HP実験室）
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
