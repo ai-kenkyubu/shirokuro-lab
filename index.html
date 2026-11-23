@@ -346,6 +346,18 @@
       margin-top: 20px;
     }
 
+    .report-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 700px) {
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .about {
       background: #eeeeeb;
     }
@@ -702,6 +714,18 @@
           </p>
         </div>
 
+        <div class="report-grid">
+        <a href="report-002.html" class="report-empty">
+          <div class="empty-symbol">↗</div>
+          <h3>自炊は「まとめ買い＆作り置き」と「都度買い」どちらが得か？</h3>
+          <p>
+            食材ロス率19%と36%の損益分岐点
+            <br>
+            #お金・節約 ｜ 2026年11月24日
+          </p>
+          <span class="report-status">READ REPORT →</span>
+        </a>
+
         <a href="report-001.html" class="report-empty">
           <div class="empty-symbol">↗</div>
           <h3>動画サブスク「つけっぱなし」vs「単発加入」</h3>
@@ -712,6 +736,7 @@
           </p>
           <span class="report-status">READ REPORT →</span>
         </a>
+        </div>
 
       </div>
     </section>
@@ -765,6 +790,38 @@
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- 04 / Verification Request -->
+    <section class="reports" id="request">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-number">04 / VERIFICATION REQUEST</div>
+          <h2 class="section-title">検証リクエスト募集中</h2>
+          <p class="section-lead">
+            あなたの日常のモヤモヤを、データと試算で白黒つけます。
+            匿名で送れるフォームからリクエストしてください。
+          </p>
+        </div>
+
+        <div style="padding:40px 30px;background:#fff;border:1px solid #deded9;text-align:center;">
+          <div style="width:48px;height:48px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:#E8FF47;color:#171717;font-size:24px;font-weight:900;">?</div>
+          <p style="margin:0 0 24px;font-size:13px;line-height:2;color:#666;">
+            「これって本当にお得？」<br>
+            「どちらを選べば損しない？」<br>
+            あなたの疑問を次の検証テーマにします。
+          </p>
+          <a href="https://forms.gle/3Dp3bptLqF98rsrg8" target="_blank" rel="noopener noreferrer" class="note-button">
+            リクエストを送る
+            <span>→</span>
+          </a>
+          <p style="margin:24px 0 0;font-size:11px;color:#777;">
+            <a href="members.html" style="color:#171717;font-weight:700;text-decoration:underline;text-underline-offset:4px;">所属AI名鑑はこちら</a>
+          </p>
+        </div>
+
       </div>
     </section>
 
