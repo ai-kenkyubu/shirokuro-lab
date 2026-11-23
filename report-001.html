@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="動画サブスクをつけっぱなしにするか、見たい時だけ単発加入するか。料金・視聴本数・年間視聴月数から損益分岐点と年間コストを試算します。">
+<meta name="theme-color" content="#f7f7f5">
+<title>動画サブスク「つけっぱなし」vs「単発加入」｜白黒ラボ</title>
+<style>
+:root{
+  --bg:#f7f7f5;--white:#fff;--black:#171717;--gray:#777;
+  --light-gray:#e5e5e2;--accent:#E8FF47;
+  --font:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--black);font-family:var(--font);line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.container{width:min(1120px,calc(100% - 48px));margin:0 auto}
+.en{font-family:Arial,Helvetica,sans-serif;letter-spacing:.12em}
+header{height:76px;border-bottom:1px solid var(--light-gray);display:flex;align-items:center;background:var(--bg)}
+.header-inner{display:flex;justify-content:space-between;align-items:center;width:min(1200px,calc(100% - 48px));margin:auto}
+.logo{font-size:21px;font-weight:900;letter-spacing:-.04em}
+.logo span{display:inline-block;margin-left:7px;font-size:10px;font-weight:500;letter-spacing:.08em;color:var(--gray)}
+.nav{display:flex;gap:32px;font-size:12px;font-weight:700}
+.nav a:hover,.back-link:hover{opacity:.55}
+main{padding-bottom:80px}
+.article-hero{padding:76px 0 58px;border-bottom:1px solid var(--light-gray)}
+.kicker{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:.15em;margin-bottom:24px}
+.kicker:before{content:"";width:24px;height:3px;background:var(--black)}
+.category{display:inline-block;background:var(--accent);padding:4px 11px;font-size:11px;font-weight:800;margin-bottom:18px}
+h1{font-size:clamp(30px,5vw,54px);line-height:1.42;font-weight:900;letter-spacing:-.055em;max-width:1000px}
+.meta{display:flex;gap:18px;flex-wrap:wrap;color:var(--gray);font-size:12px;margin-top:24px}
+.meta span+span:before{content:"/";margin-right:18px;color:#bbb}
+.article-intro{padding:38px 0 0;color:#555;font-size:14px;max-width:850px}
+section{padding:72px 0;border-bottom:1px solid var(--light-gray)}
+.section-number{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--gray);margin-bottom:10px}
+h2{font-size:clamp(25px,3.5vw,35px);line-height:1.45;font-weight:900;letter-spacing:-.045em;margin-bottom:18px}
+h3{font-size:19px;line-height:1.5;font-weight:850;margin-bottom:12px}
+.lead{font-size:14px;color:#555;max-width:900px;margin-bottom:28px}
+p{margin:0 0 14px}
+.zone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+.zone{background:var(--white);border:1px solid #deded9;padding:25px 23px;position:relative;min-height:235px}
+.zone-badge{display:inline-block;background:var(--accent);font-size:10px;font-weight:900;letter-spacing:.08em;padding:5px 9px;margin-bottom:16px}
+.zone h3{font-size:18px;margin-bottom:10px}
+.zone p{font-size:13px;color:#555;line-height:2;margin:0}
+.callout{border-left:3px solid var(--black);padding:16px 20px;background:#eeeeeb;font-size:14px;margin-top:24px}
+.table-wrap{width:100%;overflow-x:auto;border:1px solid #deded9;background:var(--white);margin:22px 0 10px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:12px;line-height:1.65;font-variant-numeric:tabular-nums}
+th,td{padding:13px 14px;border-bottom:1px solid #e8e8e5;border-right:1px solid #eeeeeb;text-align:right;white-space:nowrap}
+th{background:#171717;color:#fff;font-weight:800}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0}
+td:first-child{background:#fafaf8;font-weight:800}
+th:first-child{background:#171717;z-index:2}
+tr:last-child td{border-bottom:0}
+.table-note{font-size:11px;color:var(--gray);margin-top:8px}
+.assumptions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.assumption{background:#eeeeeb;padding:20px}
+.assumption strong{display:block;font-size:14px;margin-bottom:7px}
+.assumption p{font-size:12px;color:#555;line-height:1.9;margin:0}
+.formula-list{display:grid;gap:12px;margin-top:24px}
+.formula{background:var(--white);border:1px solid #deded9;padding:20px 22px}
+.formula strong{display:block;font-size:14px;margin-bottom:6px}
+.formula p{font-size:13px;color:#555;margin:0}
+.note-list{padding-left:1.3em;margin-top:18px}
+.note-list li{padding-left:4px;margin:0 0 13px;font-size:13px;color:#444;line-height:2}
+.method{background:#eeeeeb;padding:24px 26px;font-size:12px;color:#555;margin-top:48px}
+.back-row{padding-top:34px}
+.back-link{display:inline-flex;align-items:center;gap:10px;background:var(--black);color:var(--white);padding:14px 20px;font-size:12px;font-weight:800;transition:opacity .2s}
+footer{background:var(--black);color:var(--white);padding:45px 0}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footer-logo{font-size:20px;font-weight:900}
+.footer-right{text-align:right}
+.copyright{color:#999;font-size:10px;letter-spacing:.05em}
+.footer-home{display:inline-block;color:#fff;font-size:11px;margin-top:8px;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){
+ .container{width:calc(100% - 36px)}header{height:65px}.header-inner{width:calc(100% - 36px)}
+ .logo{font-size:18px}.logo span{display:none}.nav{gap:15px;font-size:10px}
+ .article-hero{padding:54px 0 42px}h1{font-size:clamp(29px,8vw,42px)}
+ section{padding:56px 0}.zone-grid,.assumptions{grid-template-columns:1fr}
+ .zone{min-height:0;padding:22px}.footer-inner{flex-direction:column;align-items:flex-start}
+ .footer-right{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">白黒ラボ<span>日常のモヤモヤ数値化研究所</span></a>
+    <nav class="nav" aria-label="ページナビゲーション">
+      <a href="index.html">トップページ</a>
+      <a href="#report">レポート</a>
+    </nav>
+  </div>
+</header>
+
+<main id="report">
+  <div class="container">
+    <article>
+      <div class="article-hero">
+        <div class="kicker en">DAILY LIFE × DATA × ANALYSIS</div>
+        <div class="category">#お金・節約</div>
+        <h1>動画サブスク「つけっぱなし」vs「単発加入」——数字で決める損益分岐点と年間コスト試算</h1>
+        <div class="meta"><span>公開日：2026年11月24日</span><span>REPORT 001</span></div>
+        <p class="article-intro">「なんとなくサブスクをつけっぱなしにするか、見たい時だけ単発加入するか」は、感覚ではなく数字で判断。料金・視聴ペース・解約忘れを分けて、年間コストと損益分岐点を試算します。</p>
+      </div>
+
+      <section id="conclusion">
+        <div class="section-number">01 / CONCLUSION</div>
+        <h2>結論｜あなたはどのゾーン？</h2>
+        <p class="lead">「なんとなくサブスクをつけっぱなしにするか、見たい時だけ単発加入するか」は、感覚ではなく「1回の加入月に何本見るか」と「年間で何か月視聴が発生するか」の2つの数字で決まります。</p>
+        <div class="zone-grid">
+          <div class="zone">
+            <span class="zone-badge">ZONE 01</span>
+            <h3>都度レンタル推奨</h3>
+            <p>1回の加入月に見る本数が「月額÷500円」未満の人。月1本程度なら、1本ずつ単品レンタル（目安500円）したほうが現金支出は抑えられます。</p>
+          </div>
+          <div class="zone">
+            <span class="zone-badge">ZONE 02</span>
+            <h3>単発加入推奨</h3>
+            <p>1回の加入月に「月額÷500円」本以上まとめ見し、かつ年間の視聴月数が分岐点（年7〜11か月、年額プランのあるサービスでは年7〜9か月）を下回る人。解約忘れを防げるなら明確に得をします。</p>
+          </div>
+          <div class="zone">
+            <span class="zone-badge">ZONE 03</span>
+            <h3>つけっぱなし・年額推奨</h3>
+            <p>毎月のように見る人、解約忘れを1〜2か月起こしやすい人。月額継続か年額プランで固定したほうが結果的に安くなります。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="prices">
+        <div class="section-number">02 / PRICE LIST</div>
+        <h2>料金表</h2>
+        <p class="lead">2026年11月時点・税込／公式WEB直接契約の基本プランに統一。無料トライアルは定常比較から除外</p>
+        <div class="table-wrap" role="region" aria-label="動画サブスク料金表（横スクロールできます）" tabindex="0">
+          <table>
+            <thead><tr><th>サービス・プラン</th><th>月額</th><th>年額</th><th>無料</th><th>備考</th></tr></thead>
+            <tbody>
+              <tr><td>Amazon Prime Video（プライム会員）</td><td>600円</td><td>5,900円（月約492円）</td><td>30日</td><td>広告なしオプションは別途+390円/月</td></tr>
+              <tr><td>DMM TV（DMMプレミアム）</td><td>550円</td><td>なし</td><td>14日</td><td>アプリ経由は650円のためWEB基準</td></tr>
+              <tr><td>Netflix 広告つきスタンダード</td><td>990円</td><td>なし</td><td>なし</td><td>2026年11月改定後の料金</td></tr>
+              <tr><td>Netflix スタンダード</td><td>1,790円</td><td>なし</td><td>—</td><td>2026年11月改定後の料金</td></tr>
+              <tr><td>Netflix プレミアム</td><td>2,590円</td><td>—</td><td>—</td><td>2026年11月改定後の料金</td></tr>
+              <tr><td>Disney+ スタンダード</td><td>1,250円</td><td>12,500円（月約1,042円）</td><td>—</td><td>年額は実質2か月分お得</td></tr>
+              <tr><td>Disney+ プレミアム</td><td>1,670円</td><td>16,700円（月約1,392円）</td><td>—</td><td>—</td></tr>
+              <tr><td>Hulu</td><td>1,320円</td><td>—</td><td>なし</td><td>2026年10月改定で毎月400pt付与</td></tr>
+              <tr><td>U-NEXT</td><td>2,189円</td><td>—</td><td>31日</td><td>毎月1,200pt付与</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="assumptions">
+        <div class="section-number">03 / ASSUMPTIONS</div>
+        <h2>試算の前提</h2>
+        <p class="lead">視聴ペース3段階。単発加入には「解約忘れ0か月／1か月／2か月」の3通りを計算。</p>
+        <div class="assumptions">
+          <div class="assumption"><strong>ライト層</strong><p>月1本（年12本）、単発加入は年3か月契約（1回に4本まとめ見）。</p></div>
+          <div class="assumption"><strong>ミドル層</strong><p>月3本（年36本）、単発加入は年6か月契約（1回に6本）。</p></div>
+          <div class="assumption"><strong>ヘビー層</strong><p>月8本（年96本）、毎月見るので単発でも年12か月契約＝つけっぱなしと同額。</p></div>
+        </div>
+      </section>
+
+      <section id="light">
+        <div class="section-number">04 / LIGHT USER</div>
+        <h2>ライト層の試算表</h2>
+        <p class="lead">年間支払額／1作品あたり</p>
+        <div class="table-wrap" role="region" aria-label="ライト層試算表（横スクロールできます）" tabindex="0">
+          <table>
+            <thead><tr><th>サービス</th><th>つけっぱなし</th><th>年額</th><th>単発・忘れ0</th><th>忘れ1</th><th>忘れ2</th></tr></thead>
+            <tbody>
+              <tr><td>Prime Video</td><td>7,200円/600円</td><td>5,900円/492円</td><td>1,800円/150円</td><td>2,400円/200円</td><td>3,000円/250円</td></tr>
+              <tr><td>DMM TV</td><td>6,600円/550円</td><td>年額なし</td><td>1,650円/138円</td><td>2,200円/183円</td><td>2,750円/229円</td></tr>
+              <tr><td>Netflix広告つき</td><td>11,880円/990円</td><td>年額なし</td><td>2,970円/248円</td><td>3,960円/330円</td><td>4,950円/413円</td></tr>
+              <tr><td>Netflixスタンダード</td><td>21,480円/1,790円</td><td>年額なし</td><td>5,370円/448円</td><td>7,160円/597円</td><td>8,950円/746円</td></tr>
+              <tr><td>Disney+スタンダード</td><td>15,000円/1,250円</td><td>12,500円/1,042円</td><td>3,750円/313円</td><td>5,000円/417円</td><td>6,250円/521円</td></tr>
+              <tr><td>Hulu</td><td>15,840円/1,320円</td><td>年額なし</td><td>3,960円/330円</td><td>5,280円/440円</td><td>6,600円/550円</td></tr>
+              <tr><td>U-NEXT</td><td>26,268円/2,189円</td><td>年額なし</td><td>6,567円/547円</td><td>8,756円/730円</td><td>10,945円/912円</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="middle">
+        <div class="section-number">05 / MIDDLE USER</div>
+        <h2>ミドル層の試算表</h2>
+        <p class="lead">年間支払額／1作品あたり</p>
+        <div class="table-wrap" role="region" aria-label="ミドル層試算表（横スクロールできます）" tabindex="0">
+          <table>
+            <thead><tr><th>サービス</th><th>つけっぱなし</th><th>年額</th><th>単発・忘れ0</th><th>忘れ1</th><th>忘れ2</th></tr></thead>
+            <tbody>
+              <tr><td>Prime Video</td><td>7,200円/200円</td><td>5,900円/164円</td><td>単発・忘れ0（6か月） 3,600円/100円</td><td>忘れ1（7か月） 4,200円/117円</td><td>忘れ2（8か月） 4,800円/133円</td></tr>
+              <tr><td>DMM TV</td><td>6,600円/183円</td><td>年額なし</td><td>3,300円/92円</td><td>3,850円/107円</td><td>4,400円/122円</td></tr>
+              <tr><td>Netflix広告つき</td><td>11,880円/330円</td><td>年額なし</td><td>5,940円/165円</td><td>6,930円/193円</td><td>7,920円/220円</td></tr>
+              <tr><td>Netflixスタンダード</td><td>21,480円/597円</td><td>年額なし</td><td>10,740円/298円</td><td>12,530円/348円</td><td>14,320円/398円</td></tr>
+              <tr><td>Disney+スタンダード</td><td>15,000円/417円</td><td>12,500円/347円</td><td>7,500円/208円</td><td>8,750円/243円</td><td>10,000円/278円</td></tr>
+              <tr><td>Hulu</td><td>15,840円/440円</td><td>年額なし</td><td>7,920円/220円</td><td>9,240円/257円</td><td>10,560円/293円</td></tr>
+              <tr><td>U-NEXT</td><td>26,268円/730円</td><td>年額なし</td><td>13,134円/365円</td><td>15,323円/426円</td><td>17,512円/486円</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="heavy">
+        <div class="section-number">06 / HEAVY USER</div>
+        <h2>ヘビー層の試算</h2>
+        <p class="lead">毎月見るため単発加入でも年12か月契約になり、つけっぱなしと同額。差が出るのは年額プランのあるサービスだけ：Prime Video 年額5,900円（1本61円）、Disney+スタンダード 年額12,500円（1本130円）。</p>
+        <div class="callout">月ごとに加入・解約を繰り返しても、毎月視聴するなら契約月数は12か月。単発加入にするだけでは、月額継続との差は生まれません。</div>
+      </section>
+
+      <section id="break-even">
+        <div class="section-number">07 / BREAK-EVEN POINT</div>
+        <h2>損益分岐点</h2>
+        <div class="formula-list">
+          <div class="formula"><strong>単発 vs 月額継続</strong><p>年間の視聴月数が「12 − 解約忘れ月数」を下回れば単発が得（忘れ0→年11か月以下、忘れ1→年10か月以下、忘れ2→年9か月以下）</p></div>
+          <div class="formula"><strong>単発 vs 年額</strong><p>年額÷月額が基準（Disney+スタンダードは10か月）。ここから解約忘れ月数を引いた月数が分岐点</p></div>
+          <div class="formula"><strong>単発 vs 単品レンタル（1本500円）</strong><p>その月に見る本数が「月額÷500」を超えるなら単発加入（DMM TVは2本以上、Netflix広告つきは2本以上、Disney+スタンダードは3本以上、U-NEXTは5本以上）</p></div>
+        </div>
+      </section>
+
+      <section id="cautions">
+        <div class="section-number">08 / NOTES</div>
+        <h2>注意点</h2>
+        <ul class="note-list">
+          <li>解約忘れ1か月で単発のコストは約+33%（ライト層の例：DMM TV 1,650円→2,200円、Netflixスタンダード 5,370円→7,160円）。2か月忘れると単発の優位性は大きく縮む</li>
+          <li>年額プランは途中解約しても日割り返金は原則なし。「1年使い切る」が前提</li>
+          <li>Hulu（月400pt・有効期限90日）とU-NEXT（月1,200pt）のポイントは、使い切る人だけ実質負担が下がる（Hulu実質920円相当、U-NEXT実質989円相当）。失効させるなら額面どおりで見るのが白黒ラボの基準</li>
+        </ul>
+      </section>
+
+      <div class="method">検証方法：各社の公表料金（2026年11月時点）をもとに、視聴ペースのモデルケースで試算。料金は改定される場合があります。</div>
+      <div class="back-row"><a class="back-link" href="index.html">← トップページに戻る</a></div>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">白黒ラボ</div>
+      <div class="footer-right">
+        <div class="copyright">© 2026 白黒ラボ（AI研究部 HP実験室）</div>
+        <a class="footer-home" href="index.html">トップページへ戻る →</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
