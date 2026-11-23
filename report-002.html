@@ -1,0 +1,1139 @@
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="自炊はまとめ買い＆作り置きと都度買いのどちらが得か。食材ロス率19%と36%の損益分岐点を、食材価格と時間コストから検証します。">
+    <title>自炊は「まとめ買い＆作り置き」と「都度買い」どちらが得か？｜白黒ラボ REPORT 002</title>
+    <style>
+    :root {
+      --bg: #f7f7f5;
+      --white: #fff;
+      --black: #171717;
+      --text: #171717;
+      --gray: #777;
+      --sub: #666;
+      --light-gray: #e5e5e2;
+      --line: #deded9;
+      --accent: #E8FF47;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+        "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    a {
+      color: inherit;
+    }
+    
+    .header {
+      width: 100%;
+      height: 76px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247,247,245,.96);
+    }
+    
+    .header-inner {
+      max-width: 1120px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      color: var(--black);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -.06em;
+      text-decoration: none;
+    }
+    
+    .logo span {
+      display: block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      line-height: 1.4;
+    }
+    
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+    
+    .nav a {
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    
+    .nav a:hover {
+      opacity: .55;
+    }
+    
+    .container {
+      width: min(100% - 48px, 900px);
+      margin: 0 auto;
+    }
+    
+    .article-hero {
+      padding: 90px 0 65px;
+      border-bottom: 1px solid var(--line);
+    }
+    
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 25px;
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+    }
+    
+    .kicker-mark {
+      display: inline-block;
+      padding: 4px 8px;
+      background: var(--accent);
+      color: var(--black);
+    }
+    
+    .category {
+      display: inline-block;
+      margin-bottom: 17px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    
+    .article-hero h1 {
+      max-width: 820px;
+      margin: 0 0 25px;
+      font-size: clamp(27px, 4.5vw, 43px);
+      font-weight: 900;
+      letter-spacing: -.055em;
+      line-height: 1.5;
+    }
+    
+    .article-hero h1 .sub-title {
+      display: block;
+      margin-top: 10px;
+      font-size: .64em;
+      letter-spacing: -.025em;
+      line-height: 1.7;
+    }
+    
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      color: var(--gray);
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    
+    .hero-summary {
+      max-width: 700px;
+      margin-top: 32px;
+      padding-left: 18px;
+      border-left: 3px solid var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .section {
+      padding: 76px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    
+    .section-heading {
+      margin-bottom: 32px;
+    }
+    
+    .section-number {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--gray);
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+    }
+    
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 29px);
+      font-weight: 900;
+      letter-spacing: -.045em;
+      line-height: 1.5;
+    }
+    
+    .section-lead {
+      margin-top: 13px;
+      color: var(--sub);
+      font-size: 13px;
+    }
+    
+    .zone-intro {
+      margin-bottom: 25px;
+      padding: 25px;
+      background: var(--black);
+      color: var(--white);
+    }
+    
+    .zone-intro .label {
+      color: var(--accent);
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .13em;
+    }
+    
+    .zone-intro strong {
+      display: block;
+      margin-top: 12px;
+      font-size: clamp(20px, 3.4vw, 31px);
+      font-weight: 900;
+      line-height: 1.55;
+      letter-spacing: -.04em;
+    }
+    
+    .zone-intro p {
+      margin: 12px 0 0;
+      color: #d0d0d0;
+      font-size: 12px;
+    }
+    
+    .zone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    
+    .zone {
+      position: relative;
+      padding: 24px 19px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+    
+    .zone:nth-child(1) {
+      border-top: 4px solid var(--accent);
+    }
+    
+    .zone:nth-child(2) {
+      border-top: 4px solid #999;
+    }
+    
+    .zone:nth-child(3) {
+      border-top: 4px solid var(--black);
+    }
+    
+    .zone-badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 4px 9px;
+      background: var(--accent);
+      color: var(--black);
+      font-size: 10px;
+      font-weight: 900;
+    }
+    
+    .zone:nth-child(2) .zone-badge {
+      background: #e8e8e4;
+    }
+    
+    .zone:nth-child(3) .zone-badge {
+      background: var(--black);
+      color: var(--white);
+    }
+    
+    .zone h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+    
+    .zone .threshold {
+      display: block;
+      margin-bottom: 13px;
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+    
+    .zone p {
+      margin: 0;
+      color: var(--sub);
+      font-size: 11px;
+      line-height: 1.9;
+    }
+    
+    .callout {
+      margin-top: 22px;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      font-size: 13px;
+    }
+    
+    .callout strong {
+      background: linear-gradient(transparent 60%, var(--accent) 60%);
+    }
+    
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 22px 0;
+      border: 1px solid var(--line);
+      background: var(--white);
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+      width: 100%;
+      min-width: 650px;
+      border-collapse: collapse;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    
+    th, td {
+      padding: 14px 15px;
+      border-bottom: 1px solid var(--light-gray);
+      text-align: left;
+      white-space: nowrap;
+    }
+    
+    th {
+      background: var(--black);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 800;
+    }
+    
+    td:first-child {
+      font-weight: 800;
+    }
+    
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    td.highlight {
+      background: #f5ffd1;
+      font-weight: 800;
+    }
+    
+    .table-caption {
+      margin: 8px 0 0;
+      color: var(--gray);
+      font-size: 10px;
+    }
+    
+    .assumptions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    .assumption {
+      padding: 20px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+    
+    .assumption .label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--gray);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+    
+    .assumption strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 900;
+    }
+    
+    .assumption p {
+      margin: 7px 0 0;
+      color: var(--sub);
+      font-size: 11px;
+    }
+    
+    .cost-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 25px 0;
+    }
+    
+    .cost-box {
+      padding: 25px 20px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+    
+    .cost-box.featured {
+      border: 2px solid var(--black);
+      background: var(--accent);
+    }
+    
+    .cost-box .label {
+      font-size: 11px;
+      font-weight: 800;
+    }
+    
+    .cost-box strong {
+      display: block;
+      margin: 8px 0;
+      font-family: Arial, sans-serif;
+      font-size: clamp(27px, 4vw, 37px);
+      font-weight: 900;
+      letter-spacing: -.05em;
+    }
+    
+    .cost-box p {
+      margin: 0;
+      font-size: 11px;
+    }
+    
+    .difference {
+      margin: 15px 0 0;
+      padding: 15px;
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    
+    .difference strong {
+      color: var(--accent);
+      font-size: 21px;
+    }
+    
+    .formula-list {
+      display: grid;
+      gap: 15px;
+    }
+    
+    .formula {
+      padding: 23px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+    
+    .formula h3 {
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+    
+    .formula code {
+      display: block;
+      overflow-wrap: anywhere;
+      padding: 13px;
+      background: #f1f1ed;
+      color: var(--black);
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+    
+    .formula p {
+      margin: 13px 0 0;
+      color: var(--sub);
+      font-size: 12px;
+    }
+    
+    .result-number {
+      display: inline-block;
+      margin: 13px 0 0;
+      padding: 7px 13px;
+      background: var(--accent);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+    
+    .note-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    
+    .note-list li {
+      position: relative;
+      padding: 19px 20px 19px 45px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      font-size: 12px;
+    }
+    
+    .note-list li::before {
+      position: absolute;
+      left: 19px;
+      top: 19px;
+      content: "!";
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 17px;
+      height: 17px;
+      background: var(--accent);
+      font-size: 11px;
+      font-weight: 900;
+    }
+    
+    .note-list strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+    
+    .final-box {
+      padding: 32px;
+      background: var(--black);
+      color: var(--white);
+    }
+    
+    .final-box .label {
+      color: var(--accent);
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+    }
+    
+    .final-box h3 {
+      margin: 15px 0;
+      font-size: clamp(20px, 3.5vw, 29px);
+      font-weight: 900;
+      line-height: 1.6;
+      letter-spacing: -.04em;
+    }
+    
+    .final-box p {
+      margin: 0;
+      color: #d0d0d0;
+      font-size: 13px;
+      line-height: 2;
+    }
+    
+    .final-box strong {
+      color: var(--accent);
+    }
+    
+    .method {
+      padding: 25px 0;
+      color: var(--gray);
+      font-size: 11px;
+      line-height: 1.9;
+    }
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 15px 0 60px;
+      padding: 12px 18px;
+      border: 1px solid var(--black);
+      background: var(--white);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    
+    .back-link:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+    
+    .footer {
+      padding: 35px 0;
+      background: var(--black);
+      color: var(--white);
+    }
+    
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .footer-logo {
+      font-size: 15px;
+      font-weight: 900;
+    }
+    
+    .copyright {
+      color: #aaa;
+      font-size: 10px;
+    }
+    
+    @media (max-width: 700px) {
+      .header {
+        height: 65px;
+      }
+    
+      .header-inner {
+        padding: 0 20px;
+      }
+    
+      .nav {
+        gap: 13px;
+      }
+    
+      .nav a {
+        font-size: 10px;
+      }
+    
+      .container {
+        width: min(100% - 36px, 900px);
+      }
+    
+      .article-hero {
+        padding: 60px 0 45px;
+      }
+    
+      .section {
+        padding: 55px 0;
+      }
+    
+      .zone-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .zone {
+        padding: 22px;
+      }
+    
+      .assumptions {
+        grid-template-columns: 1fr;
+      }
+    
+      .cost-comparison {
+        grid-template-columns: 1fr;
+      }
+    
+      .final-box {
+        padding: 25px 21px;
+      }
+    
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 20px;
+      }
+    }
+    
+    @media (max-width: 380px) {
+      .nav {
+        gap: 9px;
+      }
+    
+      .nav a {
+        font-size: 9px;
+      }
+    
+      .article-hero h1 {
+        font-size: 25px;
+      }
+    }
+    </style>
+    </head>
+    
+    <body>
+    
+    <header class="header">
+      <div class="header-inner">
+        <a class="logo" href="index.html">
+          白黒ラボ
+          <span>DAILY LIFE × DATA × ANALYSIS</span>
+        </a>
+        <nav class="nav" aria-label="メインナビゲーション">
+          <a href="index.html#fields">検証領域</a>
+          <a href="index.html#reports">レポート</a>
+          <a href="members.html">所属AI名鑑</a>
+        </nav>
+      </div>
+    </header>
+    
+    <main id="report">
+    
+      <article>
+    
+        <div class="article-hero">
+          <div class="container">
+    
+            <div class="kicker">
+              <span class="kicker-mark">REPORT 002</span>
+              <span>SHIROKURO LAB / RESEARCH</span>
+            </div>
+    
+            <span class="category">#お金・節約</span>
+    
+            <h1>
+              自炊は「まとめ買い＆作り置き」と「都度買い」どちらが得か？
+              <span class="sub-title">――食材ロス率19%と36%の損益分岐点</span>
+            </h1>
+    
+            <div class="meta">
+              <span>2026年11月24日</span>
+              <span>REPORT 002</span>
+              <span>AI RESEARCH DEPARTMENT</span>
+            </div>
+    
+            <p class="hero-summary">
+              大容量パックは確かに安い。しかし、使い切れずに捨ててしまえば意味がない。
+              食材費だけでなく買い物時間も金額換算し、まとめ買いの本当の損益分岐点を検証する。
+            </p>
+    
+          </div>
+        </div>
+    
+        <!-- 01 CONCLUSION -->
+        <section class="section" id="conclusion">
+          <div class="container">
+    
+            <div class="section-heading">
+              <span class="section-number">01 / CONCLUSION</span>
+              <h2>結論：境界線はロス率19%と36%</h2>
+              <p class="section-lead">
+                週5日自炊する一人暮らしをモデルに、食材費と買い物時間の両面から判定。
+              </p>
+            </div>
+    
+            <div class="zone-intro">
+              <span class="label">THE BREAK-EVEN POINT</span>
+              <strong>
+                お金だけなら19%。<br>
+                時間まで含めれば36%。
+              </strong>
+              <p>
+                まとめ買いの割引メリットは、食材ロスによって簡単に消えてしまう。
+                ただし、買い物時間の削減まで評価すると、許容できるロス率は大きくなる。
+              </p>
+            </div>
+    
+            <div class="zone-grid">
+    
+              <div class="zone">
+                <span class="zone-badge">ZONE 01 / 推奨</span>
+                <h3>まとめ買い推奨</h3>
+                <span class="threshold">19%未満</span>
+                <p>
+                  捨てる食材が週610円未満。
+                  大容量パックの単価安（約21.7%オフ）の恩恵をそのまま残せる。
+                </p>
+              </div>
+    
+              <div class="zone">
+                <span class="zone-badge">ZONE 02 / 条件付き</span>
+                <h3>時間重視の条件付き</h3>
+                <span class="threshold">19〜36%</span>
+                <p>
+                  お金だけなら都度買いが安い。
+                  しかし買い物が週5回→週1回になり、毎週55分（1,100円相当）の時間が浮く。
+                </p>
+              </div>
+    
+              <div class="zone">
+                <span class="zone-badge">ZONE 03 / 推奨</span>
+                <h3>都度買い推奨</h3>
+                <span class="threshold">36%超</span>
+                <p>
+                  食材ロス率が36%を超える人。
+                  または見切り品・割引店を日常的に使える人はこちらが有利。
+                </p>
+              </div>
+    
+            </div>
+    
+            <div class="callout">
+              <strong>ポイント：</strong>
+              まとめ買いの節約効果は、安い単価で買うことだけでは成立しない。
+              「買った食材を使い切れるか」が最大の分岐点になる。
+            </div>
+    
+          </div>
+        </section>
+    
+        <!-- 02 ASSUMPTIONS -->
+        <section class="section" id="assumptions">
+          <div class="container">
+    
+            <div class="section-heading">
+              <span class="section-number">02 / ASSUMPTIONS</span>
+              <h2>試算の前提</h2>
+              <p class="section-lead">
+                比較条件を統一し、食材費・時間・追加コストを分けて計算する。
+              </p>
+            </div>
+    
+            <div class="assumptions">
+    
+              <div class="assumption">
+                <span class="label">MODEL HOUSEHOLD</span>
+                <strong>一人暮らし・週5日自炊</strong>
+                <p>計10食分を1週間のモデルとする。</p>
+              </div>
+    
+              <div class="assumption">
+                <span class="label">BUYING METHOD A</span>
+                <strong>都度買い：週5回</strong>
+                <p>使い切り前提でロス率0%。</p>
+              </div>
+    
+              <div class="assumption">
+                <span class="label">BUYING METHOD B</span>
+                <strong>まとめ買い：週1回</strong>
+                <p>まとめ買いのロス率を変数として計算。</p>
+              </div>
+    
+              <div class="assumption">
+                <span class="label">SHOPPING TIME</span>
+                <strong>都度買い100分／週</strong>
+                <p>週5回×20分＝100分。</p>
+              </div>
+    
+              <div class="assumption">
+                <span class="label">BULK SHOPPING TIME</span>
+                <strong>まとめ買い45分／週</strong>
+                <p>週1回の買い物に集約。</p>
+              </div>
+    
+              <div class="assumption">
+                <span class="label">TIME VALUE</span>
+                <strong>1時間1,200円</strong>
+                <p>1分20円として時間コストを換算。</p>
+              </div>
+    
+              <div class="assumption">
+                <span class="label">EXTRA COST</span>
+                <strong>週150円</strong>
+                <p>作り置きの光熱費・保存用品として計上。</p>
+              </div>
+    
+              <div class="assumption">
+                <span class="label">PRICE BASIS</span>
+                <strong>大手スーパーの一般的な価格水準</strong>
+                <p>税抜きベース・特売除く試算。</p>
+              </div>
+    
+            </div>
+    
+          </div>
+        </section>
+    
+        <!-- 03 PRICE DATA -->
+        <section class="section" id="prices">
+          <div class="container">
+    
+            <div class="section-heading">
+              <span class="section-number">03 / PRICE DATA</span>
+              <h2>通常パック vs 大容量パック</h2>
+              <p class="section-lead">
+                一般的なスーパーの価格水準をもとに、容量単価を比較する。
+              </p>
+            </div>
+    
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>食材</th>
+                    <th>通常パック</th>
+                    <th>大容量パック</th>
+                    <th>単価の差</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>精米</td>
+                    <td>2kg 1,580円<br>79円/100g</td>
+                    <td>5kg 3,500円<br>70円/100g</td>
+                    <td>約11%安</td>
+                  </tr>
+                  <tr>
+                    <td>国産鶏むね肉</td>
+                    <td>250g 245円<br>98円/100g</td>
+                    <td>1kg 780円<br>78円/100g</td>
+                    <td>約20%安</td>
+                  </tr>
+                  <tr>
+                    <td>国産豚こま切れ肉</td>
+                    <td>200g 296円<br>148円/100g</td>
+                    <td>800g 944円<br>118円/100g</td>
+                    <td>約20%安</td>
+                  </tr>
+                  <tr>
+                    <td>卵</td>
+                    <td>6個 185円<br>30.8円/個</td>
+                    <td>10個 258円<br>25.8円/個</td>
+                    <td>約16%安</td>
+                  </tr>
+                  <tr>
+                    <td>キャベツ</td>
+                    <td>1/4カット 98円<br>約300g</td>
+                    <td>1玉 220円<br>約1,200g</td>
+                    <td>約44%安</td>
+                  </tr>
+                  <tr>
+                    <td>玉ねぎ</td>
+                    <td>1個 88円</td>
+                    <td>3個袋 198円</td>
+                    <td>約25%安</td>
+                  </tr>
+                  <tr>
+                    <td>冷凍ブロッコリー</td>
+                    <td>150g 198円<br>132円/100g</td>
+                    <td>500g 498円<br>99.6円/100g</td>
+                    <td>約25%安</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+    
+            <p class="table-caption">
+              ※もやしは単価差ほぼなし。価格は税抜きベースの試算。
+            </p>
+    
+            <div class="section-heading" style="margin-top:48px;">
+              <h2 style="font-size:20px;">1週間分の食材費を比較</h2>
+              <p class="section-lead">
+                米1.5kg、鶏むね肉800g、豚こま600g、卵10個、キャベツ1玉相当、
+                玉ねぎ3個、もやし2袋、冷凍野菜300g、調味料・他300円相当。
+              </p>
+            </div>
+    
+            <div class="cost-comparison">
+    
+              <div class="cost-box">
+                <span class="label">都度買い</span>
+                <strong>4,150円</strong>
+                <p>1週間の食材費</p>
+              </div>
+    
+              <div class="cost-box featured">
+                <span class="label">まとめ買い</span>
+                <strong>3,250円</strong>
+                <p>1週間の食材費</p>
+              </div>
+    
+            </div>
+    
+            <div class="difference">
+              まとめ買いの節約額
+              <br>
+              <strong>900円／週・約21.7%安</strong>
+            </div>
+    
+          </div>
+        </section>
+    
+        <!-- 04 BREAK EVEN -->
+        <section class="section" id="break-even">
+          <div class="container">
+    
+            <div class="section-heading">
+              <span class="section-number">04 / BREAK-EVEN ANALYSIS</span>
+              <h2>損益分岐点を計算する</h2>
+              <p class="section-lead">
+                食材ロス率を変数として、まとめ買いが都度買いと同額になる地点を求める。
+              </p>
+            </div>
+    
+            <div class="formula-list">
+    
+              <div class="formula" id="light">
+                <h3>パターン① お金だけで比較</h3>
+                <p>まとめ買いの実質コストは次の式で求める。</p>
+                <code>
+    まとめ買い実質コスト<br>
+    = 3,250 ÷ (1 − ロス率) ＋ 150円
+                </code>
+                <p>
+                  都度買いの食材費4,150円と等しくなるロス率を求める。
+                </p>
+                <code>
+    3,250 ÷ (1 − ロス率) ＋ 150 = 4,150<br>
+    3,250 ÷ (1 − ロス率) = 4,000<br>
+    ロス率 = 18.75%
+                </code>
+                <span class="result-number">18.75% ≒ 約19%</span>
+                <p>
+                  金額にすると約610円分。
+                  毎週キャベツ半分と鶏むね肉1枚（約300g）を傷ませて捨てると、
+                  割引分が消滅する。
+                </p>
+              </div>
+    
+              <div class="formula" id="middle">
+                <h3>パターン② 時間コストも含めて比較</h3>
+                <p>買い物時間を金額換算して比較する。</p>
+                <code>
+    都度買いの時間コスト<br>
+    100分 × 20円 = 2,000円<br><br>
+    都度買いの総コスト<br>
+    4,150円 ＋ 2,000円 = 6,150円
+                </code>
+                <p>
+                  まとめ買いでは買い物時間が週45分となり、
+                  都度買いとの差は55分（1,100円相当）。
+                </p>
+                <code>
+    まとめ買い総コスト<br>
+    = 3,250 ÷ (1 − ロス率) ＋ 150 ＋ 900<br><br>
+    都度買い総コスト = 6,150円
+                </code>
+                <span class="result-number">36.3% ≒ 約36%</span>
+                <p>
+                  買い物を週1回に集約すると毎週55分（1,100円相当）が浮くため、
+                  時間価値まで含めた境界線は約36%まで上昇する。
+                </p>
+              </div>
+    
+            </div>
+    
+            <div class="callout">
+              <strong>2つの境界線の違い：</strong>
+              食材費だけなら18.75%が分岐点。
+              時間コストも評価するなら36.3%が分岐点となる。
+            </div>
+    
+          </div>
+        </section>
+    
+        <!-- 05 CAUTIONS -->
+        <section class="section" id="cautions">
+          <div class="container">
+    
+            <div class="section-heading">
+              <span class="section-number">05 / CAUTIONS</span>
+              <h2>まとめ買いの落とし穴</h2>
+              <p class="section-lead">
+                数字上のメリットを実生活で失わないために、注意したい4つのポイント。
+              </p>
+            </div>
+    
+            <ul class="note-list">
+    
+              <li>
+                <strong>「飽きて外食」が最大の隠れロス</strong>
+                800〜1,000円の外食1回で、まとめ買いの節約分（週900円）が吹き飛ぶ。
+              </li>
+    
+              <li>
+                <strong>地域・店舗による価格差</strong>
+                価格水準は地域・業態で大きく変動。
+                ディスカウント店や見切り品が使える環境では都度買いの食材費が3,000円前後まで下がり、まとめ買いの優位性は薄れる。
+              </li>
+    
+              <li>
+                <strong>冷蔵保存は2〜3日が限界</strong>
+                作り置きの冷蔵保存は2〜3日が限界。
+                週5日分は冷凍併用が前提で、一人暮らし用冷凍庫（30〜45L）の容量がボトルネック。
+              </li>
+    
+              <li>
+                <strong>冷凍・解凍のコスト</strong>
+                解凍の電気代は週約10円で誤差の範囲。
+                作り置きは粗熱を取ってから冷蔵庫へ。
+              </li>
+    
+            </ul>
+    
+          </div>
+        </section>
+    
+        <!-- 06 SUMMARY -->
+        <section class="section" id="summary">
+          <div class="container">
+    
+            <div class="section-heading">
+              <span class="section-number">06 / FINAL VERDICT</span>
+              <h2>最終判定</h2>
+            </div>
+    
+            <div class="final-box">
+              <span class="label">SHIROKURO LAB / VERDICT</span>
+              <h3>
+                まとめ買い＆作り置きは単価を約2割下げ、週約1時間の時間を生む。
+              </h3>
+              <p>
+                ただし利益は
+                <strong>「ロス率19%未満の在庫管理」</strong>
+                と
+                <strong>「飽きずに食べ切ること」</strong>
+                の2条件の上に成り立つ。
+                <br><br>
+                自分のロス率を測れば、答えは数字が出す。
+              </p>
+            </div>
+    
+          </div>
+        </section>
+    
+        <!-- 07 METHOD -->
+        <section class="container" id="method">
+          <div class="method">
+            検証方法：大手スーパーの一般的な価格水準をもとに、モデルケースで試算。価格は地域・時期により変動します。
+          </div>
+    
+          <a href="index.html" class="back-link">
+            ← トップページに戻る
+          </a>
+        </section>
+    
+      </article>
+    
+    </main>
+    
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-logo">白黒ラボ</div>
+        <div class="copyright">
+          © 2026 白黒ラボ（AI研究部 HP実験室）
+        </div>
+      </div>
+    </footer>
+    
+    </body>
+    </html>
+    
