@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ポイント還元は1本化と使い分けで年間いくら差が出るのか。月10万円のモデルケースで還元率と年間獲得ポイントを比較検証。">
+<meta property="og:title" content="ポイント還元は「1本化」と「使い分け」で年間いくら差が出るのか？｜AI研究部 白黒ラボ">
+<meta property="og:description" content="月10万円のモデル試算では、1本化が年12,000円相当、使い分けが年28,200円相当で、差は年16,200円相当でした。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ai-kenkyubu.github.io/shirokuro-lab/report-006.html">
+<meta property="og:image" content="https://ai-kenkyubu.github.io/shirokuro-lab/header.webp">
+<meta name="twitter:card" content="summary_large_image">
+<title>REPORT 006｜ポイント還元は「1本化」と「使い分け」で年間いくら差が出るのか？｜AI研究部 白黒ラボ</title>
+<style>
+:root{--black:#111;--gray:#666;--light:#eee;--pale:#f6f6f3;--white:#fff;--lime:#E8FF47;--border:#deded9;--max:1080px}
+*{box-sizing:border-box}body{margin:0;background:var(--white);color:var(--black);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Yu Gothic","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;line-height:1.8;font-size:15px}
+a{color:inherit}.portal-bar{background:var(--black);color:var(--lime);padding:11px 20px;font-size:12px;font-weight:800;letter-spacing:.08em}.portal-bar a{color:var(--lime);text-decoration:none}
+.site-header{border-bottom:1px solid var(--border);padding:19px 24px}.header-inner{max-width:var(--max);margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.site-logo{font-size:19px;font-weight:900;letter-spacing:-.04em;text-decoration:none}.site-logo span{display:inline-block;background:var(--lime);padding:0 5px;margin-right:5px}
+.header-label{color:var(--gray);font-size:11px;font-weight:700;letter-spacing:.12em}.container{max-width:820px;padding:0 24px;margin:0 auto}
+.report-hero{padding:56px 0 44px;border-bottom:1px solid var(--border)}.report-number{display:inline-block;background:var(--black);color:var(--lime);font-size:11px;font-weight:900;padding:5px 11px;letter-spacing:.1em}
+.category{font-size:11px;color:var(--gray);border:1px solid var(--border);padding:4px 10px;font-weight:700;margin-left:8px}
+.report-hero h1{font-size:clamp(27px,5vw,42px);line-height:1.45;letter-spacing:-.045em;font-weight:900;margin:22px 0}
+.highlight{background:linear-gradient(transparent 65%,var(--lime) 65%)}.hero-description{color:var(--gray);font-size:14px}
+.section{padding:48px 0;border-bottom:1px solid var(--border)}.section h2{font-size:23px;font-weight:900;margin:0 0 20px}
+.lead-box{background:var(--black);color:var(--white);padding:32px}.lead-box h3{font-size:clamp(20px,3.5vw,29px);line-height:1.6;margin:0 0 20px;font-weight:900}.lead-box strong{color:var(--lime)}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;border-top:1px solid #555;padding-top:20px}.result-label{color:#bbb;font-size:11px;display:block}.result-value{font-size:26px;font-weight:900}
+.table-wrap{overflow-x:auto;border:1px solid var(--border)}table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}th{background:var(--black);color:#fff;padding:13px 15px;text-align:left}td{padding:13px 15px;border-bottom:1px solid var(--border);vertical-align:top}.rate{font-size:16px;font-weight:900;white-space:nowrap}.rate em{font-style:normal;background:var(--lime);padding:1px 5px}
+.calc-row{display:flex;justify-content:space-between;gap:12px;padding:15px 10px;border-bottom:1px solid var(--border);font-size:13px}.calc-points{font-weight:900;font-size:16px}
+.calc-total{background:var(--black);color:#fff;padding:20px 22px;display:flex;justify-content:space-between;font-weight:900}.calc-total b{color:var(--lime);font-size:24px}
+.note-box{background:var(--pale);border-left:4px solid var(--black);padding:16px 20px;margin-top:22px;font-size:12px;color:var(--gray)}.note-box strong{display:block;color:var(--black);font-size:13px;margin-bottom:5px}
+ul.cond{list-style:none;padding:0;margin:0}ul.cond li{padding:15px 5px;border-bottom:1px solid var(--border);font-size:13px}ul.cond strong{display:block;font-size:14px}
+.caution-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.caution-card{border:1px solid var(--border);padding:18px}.caution-card h3{font-size:14px;margin:0 0 7px}.caution-card p{color:var(--gray);font-size:12px;margin:0}
+.source-list{font-size:12px;color:var(--gray);line-height:2}.final{background:var(--lime);padding:32px;text-align:center;margin:40px 0}.final h3{font-size:clamp(19px,3.5vw,27px);margin:8px 0}
+.site-footer{background:var(--black);color:#fff;padding:40px 24px}.footer-inner{max-width:820px;margin:auto}.footer-notice{color:#bbb;font-size:11px;line-height:1.9;border-top:1px solid #444;border-bottom:1px solid #444;padding:15px 0}.copyright{color:#888;font-size:11px;margin-top:18px}
+@media(max-width:700px){.result-grid{grid-template-columns:1fr}.caution-grid{grid-template-columns:1fr}.container{padding:0 18px}}
+</style>
+</head>
+<body>
+<div class="portal-bar"><a href="https://ai-kenkyubu.github.io/portal/">← AI研究部ポータル TOPへ</a></div>
+<header class="site-header"><div class="header-inner"><a href="index.html" class="site-logo"><span>白黒</span>AI研究部 白黒ラボ</a><div class="header-label">日常のモヤモヤ数値化研究所</div></div></header>
+<main class="container">
+<section class="report-hero">
+<span class="report-number">REPORT 006</span><span class="category">お金・節約</span>
+<h1>ポイント還元は<br>「<span class="highlight">1本化</span>」と「<span class="highlight">使い分け</span>」で<br>年間いくら差が出るのか？</h1>
+<p class="hero-description">クレジットカードやスマホ決済のポイント還元。ひとつの決済手段にまとめた場合と、利用先によって使い分けた場合で、年間の獲得ポイントにどれほどの差が生まれるのか。月10万円の支出を想定したモデルケースで比較しました。調査日：2026年11月24日</p>
+</section>
+<section class="section">
+<h2>今回の検証結果</h2>
+<div class="lead-box">
+<h3>月10万円のモデル試算では、1本化が年<strong>12,000円相当</strong>、使い分けが年<strong>28,200円相当</strong>で、差は<strong>年16,200円相当</strong>でした。</h3>
+<div class="result-grid">
+<div><span class="result-label">1本化・年間</span><span class="result-value">12,000pt相当</span></div>
+<div><span class="result-label">使い分け・年間</span><span class="result-value">28,200pt相当</span></div>
+<div><span class="result-label">年間の差</span><span class="result-value" style="color:var(--lime)">+16,200pt相当</span></div>
+</div>
+<p style="color:#bbb;font-size:11px">※1ポイント＝1円相当として換算したモデル試算です。実際のポイント価値や獲得条件は各サービスによって異なります。管理のシンプルさを優先する場合は1本化、対象店舗での利用頻度が高い場合は使い分けが選択肢になるかもしれません。</p>
+</div>
+</section>
+<section class="section">
+<h2>決済サービスの還元率を比較</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>決済サービス</th><th>還元率の目安</th><th>主な条件・特徴</th></tr></thead>
+<tbody>
+<tr><td><strong>楽天カード（通常利用）</strong></td><td class="rate">1.0%</td><td>原則100円につき1ポイント。一部、還元率が異なる利用先があります。</td></tr>
+<tr><td><strong>三井住友カード（スマホタッチ決済）</strong></td><td class="rate"><em>7.0%</em></td><td>対象コンビニ・飲食店で、スマホのVisa・Mastercardタッチ決済または対象モバイルオーダーを利用した場合（通常0.5%＋6.5%）。</td></tr>
+<tr><td><strong>Oliveフレキシブルペイ（クレジットモード）</strong></td><td class="rate"><em>8.0%</em></td><td>同じく対象店舗・対象のスマホタッチ決済等を利用した場合（通常0.5%＋7.5%）。</td></tr>
+<tr><td><strong>PayPayクレジット</strong></td><td class="rate">1.0〜1.5%</td><td>基本1.0%。PayPayステップの条件（前月に200円以上の決済30回以上＋合計10万円以上）を達成すると翌月1.5%。残高払いは0.5%〜1.0%。</td></tr>
+<tr><td><strong>楽天ペイ（楽天キャッシュ払い）</strong></td><td class="rate">1.0〜1.5%</td><td>カウント期間中に対象の楽天ポイントカードを2回以上提示すると1.5%。提示が条件に届かない場合は1.0%。</td></tr>
+</tbody></table></div>
+<p style="font-size:11px;color:var(--gray)">※7.0%・8.0%は対象店舗と対象の支払い方法を満たした場合の還元率で、通常利用全般に適用される数字ではありません。</p>
+</section>
+<section class="section">
+<h2>月10万円の試算内訳（使い分け）</h2>
+<div class="calc-row"><span>対象コンビニ・飲食店（三井住友カード スマホタッチ）</span><span>20,000円 × 7.0%</span><span class="calc-points">1,400pt</span></div>
+<div class="calc-row"><span>PayPay対応店（PayPayクレジット・条件達成時）</span><span>30,000円 × 1.5%</span><span class="calc-points">450pt</span></div>
+<div class="calc-row"><span>その他の店舗・固定費（基本還元率）</span><span>50,000円 × 1.0%</span><span class="calc-points">500pt</span></div>
+<div class="calc-total"><span>月間合計</span><b>2,350pt / 月</b></div>
+<div class="note-box"><strong>計算式</strong>1本化：100,000円 × 1.0% ＝ 月1,000pt（年12,000pt）。使い分け：1,400＋450＋500 ＝ 月2,350pt（年28,200pt）。差額：28,200 − 12,000 ＝ 年16,200pt相当。対象コンビニ・飲食店の利用だけでも、月1万円なら（7%−1%）×10,000円＝月600円相当・年7,200円相当の差になりました。</div>
+</section>
+<section class="section">
+<h2>条件によって結果がどう変わるか</h2>
+<ul class="cond">
+<li><strong>対象店舗での利用額</strong><p>対象店舗の利用が月2万円から月5,000円に減ると、7.0%分は月1,400ptから月350ptへ下がり、年間の差も縮まる結果でした。</p></li>
+<li><strong>ステップ条件の達成有無</strong><p>PayPayクレジットの1.5%は条件達成が前提です。未達成の場合は1.0%で計算され、使い分け合計は月2,200pt（差は年14,400円相当）になりました。決済を分散させすぎると、回数・金額の条件に届きにくくなる場合もあります。</p></li>
+<li><strong>楽天ペイを使う場合</strong><p>楽天ペイは金額の条件ではなくポイントカード提示回数が条件のため、日常的に楽天ポイント加盟店を使う環境では条件を満たしやすいかもしれません。</p></li>
+</ul>
+</section>
+<section class="section">
+<h2>注意点</h2>
+<div class="caution-grid">
+<div class="caution-card"><h3>スマホタッチ決済のみ対象</h3><p>三井住友カードの7.0%はスマホのタッチ決済（または対象モバイルオーダー）が条件です。カード現物のタッチ決済、差し込み、磁気取引、iDは対象外です。</p></div>
+<div class="caution-card"><h3>200円ごとの集計と端数</h3><p>三井住友カードやPayPayクレジットは200円ごとの集計で、端数は切り捨てられます。小さい金額の決済では、単純な掛け算より実際の獲得数が少なくなる場合があります。</p></div>
+<div class="caution-card"><h3>ポイントの分散</h3><p>使い分けではVポイント・PayPayポイント・楽天ポイントなど種類が分かれます。有効期限や使える場所がそれぞれ異なるため、失効や端数の残りが出やすい面もあります。</p></div>
+<div class="caution-card"><h3>対象外の支払い</h3><p>税金・公共料金・電子マネーチャージなどは、サービスごとに還元率が下がったり対象外になったりします。月10万円すべてが通常還元の対象になるとは限りません。</p></div>
+</div>
+</section>
+<section class="section">
+<h2>試算の前提と出典</h2>
+<p class="source-list">
+前提：月間支出100,000円を毎月12か月継続／1ポイント＝1円相当／端数切り捨ては概算では考慮せず還元率で計算／各サービスの条件を満たした状態を想定。<br>
+出典：楽天カード公式サイト（基本還元率1.0%）、三井住友カード公式サイト「Vポイントアッププログラム」（対象店舗での還元率）、PayPay公式サイト「PayPayステップ」（付与率と条件）、楽天ペイ公式サイト（ポイント還元プログラム）。参照日：2026年11月24日。還元条件は変更される場合があります。
+</p>
+<div class="final"><div style="font-size:11px;font-weight:900;letter-spacing:.15em">FINAL VERDICT｜白黒判定</div><h3>月10万円のモデルケースでは、年間16,200円相当の差。<br>差の中心は、対象コンビニ・飲食店での還元率でした。</h3></div>
+</section>
+</main>
+<footer class="site-footer"><div class="footer-inner">
+<div style="font-size:18px;font-weight:900;margin-bottom:14px">AI研究部 白黒ラボ</div>
+<p class="footer-notice">AIを使用して運営しています。価格・料金は調査時点のものです。試算はモデルケースであり、実際の損得は条件によって変わります。特定のサービス・商品を推奨するものではありません。</p>
+<p class="copyright">© 2026 AI研究部 白黒ラボ（AI研究部 HP実験室）</p>
+</div></footer>
+</body>
+</html>
