@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="パナソニックのドラム式洗濯乾燥機LXシリーズ、2026年モデルと2025年モデルを実売価格・公表スペックから比較。">
+  <meta property="og:title" content="ドラム式洗濯乾燥機は「最新」と「型落ち」でどれくらい違うのか？｜AI研究部 白黒ラボ">
+  <meta property="og:description" content="価格差は101,170円（型落ちが約27%安い）。一方、洗濯〜乾燥の消費電力量は両機とも800Whで、電気代の差は0円でした。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ai-kenkyubu.github.io/shirokuro-lab/report-007.html">
+  <meta property="og:image" content="https://ai-kenkyubu.github.io/shirokuro-lab/header.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>REPORT 007｜ドラム式洗濯乾燥機は「最新」と「型落ち」でどれくらい違うのか？｜AI研究部 白黒ラボ</title>
+  <style>
+    :root {
+      --black: #111;
+      --ink: #202020;
+      --gray-900: #333;
+      --gray-700: #666;
+      --gray-500: #888;
+      --gray-300: #d5d5d5;
+      --gray-200: #e8e8e8;
+      --gray-100: #f4f4f1;
+      --paper: #fff;
+      --lime: #E8FF47;
+      --content: 1080px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+        "Yu Gothic", Meiryo, sans-serif;
+      line-height: 1.85;
+      letter-spacing: .025em;
+    }
+    a { color: inherit; }
+    .portal-bar {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      padding: 8px max(20px, calc((100% - var(--content)) / 2));
+      background: var(--black);
+    }
+    .portal-bar a {
+      color: var(--lime);
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .portal-bar a:hover { text-decoration: underline; }
+    .hero {
+      background: var(--black);
+      color: var(--paper);
+      padding: 58px 24px 64px;
+      border-bottom: 8px solid var(--lime);
+    }
+    .hero-inner, main, footer .footer-inner {
+      width: min(100%, var(--content));
+      margin: 0 auto;
+    }
+    .report-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+    .report-number {
+      display: inline-block;
+      padding: 4px 10px;
+      color: var(--black);
+      background: var(--lime);
+    }
+    .category { color: #c9c9c9; }
+    .date { color: #aaa; margin-left: auto; letter-spacing: .04em; }
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(2rem, 5.2vw, 3.65rem);
+      line-height: 1.32;
+      letter-spacing: -.035em;
+      font-weight: 900;
+    }
+    .hero-lead {
+      max-width: 760px;
+      margin: 24px 0 0;
+      color: #d1d1d1;
+      font-size: 1rem;
+    }
+    main { padding: 52px 24px 80px; }
+    .intro {
+      max-width: 850px;
+      margin: 0 auto 46px;
+      font-size: 1.04rem;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--gray-700);
+      font-size: .75rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0 0 22px;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: 1.4;
+      letter-spacing: -.02em;
+      font-weight: 900;
+    }
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.12rem;
+      line-height: 1.5;
+      font-weight: 850;
+    }
+    p { margin: 0 0 1em; }
+    .summary {
+      margin: 0 0 64px;
+      padding: 30px;
+      background: var(--gray-100);
+      border-top: 5px solid var(--black);
+    }
+    .summary h2 { margin-bottom: 24px; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .summary-item {
+      min-width: 0;
+      padding: 20px 18px;
+      background: var(--paper);
+      border: 1px solid var(--gray-200);
+    }
+    .summary-item .label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gray-700);
+      font-size: .76rem;
+      font-weight: 800;
+    }
+    .summary-item strong {
+      display: block;
+      font-size: clamp(1.35rem, 2.7vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -.04em;
+    }
+    .summary-item small {
+      display: block;
+      margin-top: 8px;
+      color: var(--gray-700);
+      font-size: .78rem;
+      line-height: 1.6;
+    }
+    .summary-note {
+      margin: 20px 0 0;
+      padding: 15px 18px;
+      background: var(--lime);
+      color: var(--black);
+      font-weight: 750;
+    }
+    .section { margin: 0 0 66px; }
+    .section-head {
+      padding-bottom: 14px;
+      margin-bottom: 22px;
+      border-bottom: 2px solid var(--black);
+    }
+    .section-head .eyebrow { margin-bottom: 5px; }
+    .models {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 0 0 22px;
+    }
+    .model {
+      padding: 20px 22px;
+      border: 1px solid var(--gray-300);
+    }
+    .model.latest { background: var(--black); color: var(--paper); border-color: var(--black); }
+    .model .model-tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 2px 8px;
+      background: var(--lime);
+      color: var(--black);
+      font-size: .7rem;
+      font-weight: 900;
+    }
+    .model:not(.latest) .model-tag { background: var(--gray-200); }
+    .model h3 { margin: 0; font-size: 1.25rem; }
+    .model p { margin: 4px 0 0; font-size: .83rem; opacity: .78; }
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--gray-300);
+    }
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      font-size: .88rem;
+      line-height: 1.6;
+    }
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: middle;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    thead th {
+      color: var(--paper);
+      background: var(--black);
+      font-weight: 800;
+    }
+    thead th:first-child { width: 25%; }
+    tbody th {
+      background: var(--gray-100);
+      font-weight: 800;
+    }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    .diff { font-weight: 800; }
+    .highlight-row td:last-child { background: #f6ffd0; }
+    .table-hint {
+      margin: 8px 0 0;
+      color: var(--gray-700);
+      font-size: .75rem;
+    }
+    .callout {
+      margin-top: 20px;
+      padding: 20px 22px;
+      border-left: 5px solid var(--lime);
+      background: var(--gray-100);
+    }
+    .callout strong { font-weight: 900; }
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .scenario {
+      padding: 22px;
+      border: 1px solid var(--gray-300);
+      border-top: 4px solid var(--black);
+    }
+    .scenario .number {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--gray-500);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+    .scenario p { margin: 0; font-size: .9rem; }
+    .caution-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: caution;
+    }
+    .caution-list li {
+      position: relative;
+      padding: 17px 18px 17px 54px;
+      border-bottom: 1px solid var(--gray-200);
+      counter-increment: caution;
+    }
+    .caution-list li::before {
+      content: counter(caution, decimal-leading-zero);
+      position: absolute;
+      top: 17px;
+      left: 0;
+      color: var(--gray-500);
+      font-size: .8rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+    .assumptions {
+      padding: 26px;
+      background: var(--gray-100);
+    }
+    .assumptions ul { margin: 0; padding-left: 1.3em; }
+    .assumptions li { margin: 0 0 9px; }
+    .assumptions li:last-child { margin-bottom: 0; }
+    .sources {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--gray-300);
+    }
+    .sources h3 { font-size: .95rem; }
+    .sources ul { font-size: .88rem; }
+    .sources a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .closing {
+      padding: 28px;
+      color: var(--paper);
+      background: var(--black);
+    }
+    .closing .eyebrow { color: var(--lime); }
+    .closing p { margin: 0; color: #e2e2e2; }
+    footer {
+      padding: 30px 24px;
+      color: #d7d7d7;
+      background: var(--black);
+      border-top: 1px solid #444;
+      font-size: .78rem;
+    }
+    footer p { margin: 0 0 10px; }
+    footer p:last-child { margin-bottom: 0; }
+    .copyright { color: var(--lime); font-weight: 800; }
+    @media (max-width: 760px) {
+      .hero { padding: 42px 20px 48px; }
+      main { padding: 38px 18px 58px; }
+      .date { width: 100%; margin-left: 0; }
+      .summary { padding: 22px 18px; }
+      .summary-grid, .scenario-grid { grid-template-columns: 1fr; }
+      .summary-item { padding: 16px; }
+      .models { grid-template-columns: 1fr; }
+      .section { margin-bottom: 52px; }
+    }
+    @media (max-width: 420px) {
+      h1 { font-size: 1.85rem; }
+      .portal-bar { padding-inline: 18px; }
+      .intro { font-size: .96rem; }
+      .closing { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="portal-bar" aria-label="ポータル">
+    <a href="https://ai-kenkyubu.github.io/portal/">AI研究部 ポータルへ</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="report-meta">
+        <span class="report-number">REPORT 007</span>
+        <span class="category">#買い物・スペック</span>
+        <time class="date" datetime="2026-11-25">2026年11月25日</time>
+      </div>
+      <h1>ドラム式洗濯乾燥機は「最新」と「型落ち」でどれくらい違うのか？</h1>
+      <p class="hero-lead">約10万円の価格差は、性能や日々のコストの差に見合うのか。パナソニック LXシリーズの最上位機種を、価格と公表スペックから比較します。</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p>家電の買い替えで迷いやすい「最新モデル」と「1年前の型落ちモデル」。今回は、パナソニックのななめドラム洗濯乾燥機LXシリーズ最上位機種、2026年発売の最新モデル<strong>NA-LX129FL</strong>と、2025年発売の型落ちモデル<strong>NA-LX129EL</strong>を対象に、実売価格とメーカー公表スペックを比較しました。</p>
+      <p>価格差だけでなく、洗濯・乾燥の基本性能、運転音、メンテナンス機構、本体寸法まで確認します。</p>
+    </section>
+
+    <section class="summary" aria-labelledby="summary-title">
+      <p class="eyebrow">KEY FINDINGS / 結論</p>
+      <h2 id="summary-title">価格差は約10.1万円。基本性能と公表ランニングコストは同じ</h2>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="label">実売価格の差</span>
+          <strong>101,170円</strong>
+          <small>最新379,170円／型落ち278,000円<br>型落ちが約27%安い</small>
+        </div>
+        <div class="summary-item">
+          <span class="label">洗濯〜乾燥1回の電気代目安</span>
+          <strong>約24.8円</strong>
+          <small>両機とも800Wh。差は0円<br>31円/kWhで試算</small>
+        </div>
+        <div class="summary-item">
+          <span class="label">洗濯〜乾燥の基本仕様</span>
+          <strong>ほぼ同一</strong>
+          <small>容量12.0kg／6.0kg<br>目安時間は約98分</small>
+        </div>
+      </div>
+      <p class="summary-note">大きな違いは、乾燥長もちユニット・自動投入経路の自動洗浄と、脱水音。最新モデルは脱水時に41dBから36dBへ低減しています。</p>
+    </section>
+
+    <section class="section" aria-labelledby="comparison-title">
+      <div class="section-head">
+        <p class="eyebrow">01 / SPEC COMPARISON</p>
+        <h2 id="comparison-title">最新モデルと型落ちモデルを比較</h2>
+      </div>
+      <div class="models">
+        <div class="model latest">
+          <span class="model-tag">LATEST / 2026年発売</span>
+          <h3>NA-LX129FL</h3>
+          <p>最新モデル</p>
+        </div>
+        <div class="model">
+          <span class="model-tag">PREVIOUS / 2025年発売</span>
+          <h3>NA-LX129EL</h3>
+          <p>1年前の型落ちモデル</p>
+        </div>
+      </div>
+      <div class="table-wrap" role="region" aria-label="最新モデルと型落ちモデルの比較表" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">比較項目</th>
+              <th scope="col">最新 NA-LX129FL</th>
+              <th scope="col">型落ち NA-LX129EL</th>
+              <th scope="col">差・ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <th scope="row">実売価格（価格.com最安）</th>
+              <td>379,170円</td>
+              <td>278,000円</td>
+              <td class="diff">差101,170円</td>
+            </tr>
+            <tr>
+              <th scope="row">洗濯・脱水／乾燥容量</th>
+              <td>12.0kg／6.0kg</td>
+              <td>12.0kg／6.0kg</td>
+              <td class="diff">同一</td>
+            </tr>
+            <tr>
+              <th scope="row">消費電力量（洗濯／洗濯〜乾燥）</th>
+              <td>68Wh／800Wh<br>（省エネ乾燥620Wh）</td>
+              <td>68Wh／800Wh<br>（省エネ乾燥620Wh）</td>
+              <td class="diff">差0Wh</td>
+            </tr>
+            <tr>
+              <th scope="row">電気代目安（洗濯〜乾燥1回）</th>
+              <td>約24.8円</td>
+              <td>約24.8円</td>
+              <td class="diff">差0円</td>
+            </tr>
+            <tr>
+              <th scope="row">標準使用水量（洗濯／洗濯〜乾燥）</th>
+              <td>83L／55L</td>
+              <td>83L／55L</td>
+              <td class="diff">同一</td>
+            </tr>
+            <tr>
+              <th scope="row">目安時間（洗濯／洗濯〜乾燥）</th>
+              <td>約32分／約98分</td>
+              <td>約32分／約98分</td>
+              <td class="diff">同一</td>
+            </tr>
+            <tr>
+              <th scope="row">最大消費電力（温水時）</th>
+              <td>1,280W</td>
+              <td>1,190W</td>
+              <td class="diff">最新が+90W</td>
+            </tr>
+            <tr>
+              <th scope="row">運転音（洗い／脱水／乾燥）</th>
+              <td>32／36／48dB</td>
+              <td>32／41／46dB</td>
+              <td class="diff">脱水は最新が-5dB<br>乾燥は型落ちが-2dB</td>
+            </tr>
+            <tr>
+              <th scope="row">本体寸法（給・排水ホース含む）</th>
+              <td>幅639×高さ1060×奥行732mm</td>
+              <td>幅639×高さ1060×奥行722mm</td>
+              <td class="diff">最新が奥行+10mm</td>
+            </tr>
+            <tr>
+              <th scope="row">乾燥のお手入れ</th>
+              <td>乾燥長もちユニット<br>（サイクロン分離）</td>
+              <td>従来構造</td>
+              <td class="diff">最新に新機構</td>
+            </tr>
+            <tr>
+              <th scope="row">自動投入の経路洗浄</th>
+              <td>自動洗浄あり</td>
+              <td>手動のお手入れが必要</td>
+              <td class="diff">最新に自動洗浄を追加</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-hint">※価格は2026年11月時点の掲載最安価格です。</p>
+      <div class="callout">
+        <strong>比較のポイント：</strong>容量・消費電力量・標準使用水量・運転時間は同一です。最新モデルはメンテナンス機構と脱水音に変更がある一方、乾燥音は型落ちモデルの数値が2dB小さく、本体奥行は最新モデルの方が10mm大きくなっています。
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="conditions-title">
+      <div class="section-head">
+        <p class="eyebrow">02 / CONDITIONS</p>
+        <h2 id="conditions-title">条件によって、価格差の意味は変わる</h2>
+      </div>
+      <div class="scenario-grid">
+        <article class="scenario">
+          <span class="number">CASE 01</span>
+          <h3>ランニングコストを重視する場合</h3>
+          <p>電気代・水道代の公表値は同一です。価格差101,170円を日々の光熱費の差で相殺する計算にはならず、価格差は初期費用の差として残ります。</p>
+        </article>
+        <article class="scenario">
+          <span class="number">CASE 02</span>
+          <h3>乾燥を高頻度で使う場合</h3>
+          <p>最新モデルの乾燥長もちユニットは、熱交換器への糸くず付着を抑える仕組みです。自動投入経路の自動洗浄とあわせ、数年後の乾燥効率やお手入れの手間に差が出る可能性があります。</p>
+        </article>
+        <article class="scenario">
+          <span class="number">CASE 03</span>
+          <h3>夜間・早朝に運転する場合</h3>
+          <p>脱水音は最新36dB、型落ち41dBで、最新モデルの数値が小さくなっています。一方、乾燥音は最新48dB、型落ち46dBで、乾燥工程では型落ちの方が小さい数値です。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="caution-title">
+      <div class="section-head">
+        <p class="eyebrow">03 / CAUTIONS</p>
+        <h2 id="caution-title">比べる際の注意点</h2>
+      </div>
+      <ol class="caution-list">
+        <li><strong>設置スペース：</strong>最新モデルは奥行が732mmで、型落ちモデルより10mm大きくなっています。防水パンのサイズやドアの開閉スペースに余裕がない場合、設置条件の確認が必要です。</li>
+        <li><strong>型落ちモデルの価格：</strong>在庫状況によって価格は大きく変動します。延長保証や配送・設置費込みの条件で比較すると、価格差が約8万円台に縮まる場合もありました。</li>
+        <li><strong>新品時の公表値：</strong>消費電力量は新品時のメーカー公表値です。経年による乾燥効率の変化は、この公表値には含まれていません。</li>
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="method-title">
+      <div class="section-head">
+        <p class="eyebrow">04 / METHOD &amp; SOURCES</p>
+        <h2 id="method-title">試算の前提と出典</h2>
+      </div>
+      <div class="assumptions">
+        <ul>
+          <li>電気代は、全国家庭電気製品公正取引協議会の電力料金目安単価31円/kWh（税込）を使用しています。</li>
+          <li>洗濯〜乾燥1回の消費電力量0.8kWhをもとに、<strong>0.8kWh × 31円 = 24.8円</strong>と算出しています。</li>
+          <li>価格は2026年11月時点の価格.com最安掲載価格です。延長保証料・リサイクル料・設置費は含みません。</li>
+        </ul>
+        <div class="sources">
+          <h3>参照した情報</h3>
+          <ul>
+            <li>パナソニック公式 NA-LX129F／NA-LX129E 仕様ページ</li>
+            <li>価格.com NA-LX129FL／NA-LX129EL 製品ページ</li>
+            <li>ビックカメラ.com NA-LX129FL-C 商品ページ</li>
+            <li>全国家庭電気製品公正取引協議会 電力料金目安単価</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <p class="eyebrow">REPORT 007 / SUMMARY</p>
+      <h2>約10万円の差は、基本性能よりも「手入れ」と「使い方」の差</h2>
+      <p>今回比較した2機種は、容量・運転時間・公表消費電力量が同じで、日々の電気代・水道代にも公表値上の差はありません。最新モデルには乾燥や自動投入まわりのメンテナンス機構、脱水音の低減という変更があります。価格だけでなく、乾燥の使用頻度、手入れにかける時間、運転する時間帯、設置寸法などを含めて見ると、約10万円の差の捉え方は条件によって変わります。</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>AIを使用して運営しています。価格・料金は調査時点のものです。試算はモデルケースであり、実際の損得は条件によって変わります。特定のサービス・商品を推奨するものではありません。</p>
+      <p class="copyright">© 2026 AI研究部 白黒ラボ（AI研究部 HP実験室）</p>
+    </div>
+  </footer>
+</body>
+</html>
