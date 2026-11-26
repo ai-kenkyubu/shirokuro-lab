@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="洗濯乾燥機と部屋干し＋除湿機の所要時間・電気代を比較。乾燥方式、洗濯物の量、冬の低温による違いを数値化した検証レポート。">
+<meta property="og:title" content="洗濯乾燥機と「部屋干し＋除湿機」、時間と電気代はどう違う？｜AI研究部 白黒ラボ">
+<meta property="og:description" content="ドラム式（6kg）は約98分・約24.8円、部屋干し＋除湿機（約2kg）は約122分・約11.8円。1kgあたりでは順位が逆転しました。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ai-kenkyubu.github.io/shirokuro-lab/report-008.html">
+<meta property="og:image" content="https://ai-kenkyubu.github.io/shirokuro-lab/header.webp">
+<meta name="twitter:card" content="summary_large_image">
+<title>REPORT 008｜洗濯乾燥機と部屋干し＋除湿機、時間と電気代はどう違う？｜白黒ラボ</title>
+<style>
+:root{--black:#111111;--white:#ffffff;--gray-100:#f5f5f5;--gray-200:#e8e8e8;--gray-300:#d0d0d0;--gray-500:#777777;--gray-700:#444444;--lime:#E8FF47;--max-width:1000px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--black);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Yu Gothic","YuGothic","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;line-height:1.8;font-size:15px}
+a{color:inherit}
+.portal-bar{width:100%;background:var(--black);color:var(--lime);padding:11px 20px;font-size:12px;font-weight:800;letter-spacing:.12em}
+.portal-bar a{color:var(--lime);text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.portal-bar a::before{content:"←";font-size:16px}
+.portal-bar a:hover{opacity:.75}
+.site-header{border-bottom:1px solid var(--gray-200);padding:24px 20px}
+.header-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.site-logo{font-size:19px;font-weight:900;letter-spacing:.08em}
+.site-logo span{display:block;font-size:10px;color:var(--gray-500);letter-spacing:.16em;font-weight:600}
+.header-label{font-size:10px;font-weight:800;letter-spacing:.15em;color:var(--gray-500);text-align:right}
+main{max-width:var(--max-width);margin:0 auto;padding:0 24px 100px}
+.hero{padding:76px 0 55px;border-bottom:2px solid var(--black)}
+.report-number{display:inline-block;background:var(--black);color:var(--lime);font-size:12px;font-weight:900;letter-spacing:.17em;padding:6px 13px;margin-bottom:23px}
+.category{font-size:12px;font-weight:800;letter-spacing:.1em;margin-bottom:13px}
+.hero h1{font-size:clamp(27px,5vw,45px);line-height:1.45;letter-spacing:-.045em;font-weight:900;margin:0 0 25px}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;color:var(--gray-500);font-size:12px;font-weight:600}
+.hero-meta span+span::before{content:"/";margin-right:20px;color:var(--gray-300)}
+.intro{padding:36px 0;font-size:15px;color:var(--gray-700);border-bottom:1px solid var(--gray-200)}
+.intro strong{color:var(--black)}
+.section{padding:65px 0;border-bottom:1px solid var(--gray-200)}
+.section-heading{display:flex;align-items:center;gap:15px;margin:0 0 30px}
+.section-number{font-size:12px;font-weight:900;color:var(--gray-500);letter-spacing:.1em}
+.section-heading h2{font-size:25px;line-height:1.4;font-weight:900;margin:0;letter-spacing:-.03em}
+.section-heading h2::after{content:"";display:block;width:42px;height:5px;background:var(--lime);margin-top:10px}
+.section-lead{color:var(--gray-700);margin:-10px 0 30px;font-size:14px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.result-card{border:1px solid var(--gray-300);padding:25px;position:relative;min-width:0}
+.result-card.featured{background:var(--black);color:var(--white);border-color:var(--black)}
+.result-label{font-size:11px;font-weight:800;letter-spacing:.1em;margin-bottom:12px;color:var(--gray-500)}
+.featured .result-label{color:var(--lime)}
+.result-card h3{font-size:18px;font-weight:900;margin:0 0 22px}
+.result-main{border-bottom:1px solid var(--gray-200);padding-bottom:15px;margin-bottom:15px}
+.featured .result-main{border-color:#444}
+.result-value{display:block;font-size:clamp(30px,4vw,42px);line-height:1.2;font-weight:900;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.result-unit{font-size:12px;color:var(--gray-500);font-weight:600}
+.featured .result-unit{color:#bbbbbb}
+.result-sub{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:5px 0;color:var(--gray-700)}
+.featured .result-sub{color:#dddddd}
+.result-sub strong{font-weight:900;color:var(--black)}
+.featured .result-sub strong{color:var(--lime)}
+.work-tag{display:inline-block;background:var(--gray-100);padding:5px 9px;font-size:11px;font-weight:800;margin-top:17px}
+.featured .work-tag{background:var(--lime);color:var(--black)}
+.table-wrap{width:100%;overflow-x:auto;margin:25px 0;border:1px solid var(--gray-300)}
+table{width:100%;border-collapse:collapse;min-width:550px;font-size:13px}
+th,td{padding:15px 17px;text-align:left;border-bottom:1px solid var(--gray-200);vertical-align:middle}
+thead th{background:var(--black);color:var(--white);font-size:12px;font-weight:800}
+tbody th{background:var(--gray-100);font-weight:800;width:25%}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:none}
+td strong{font-weight:900}
+.highlight-cell{background:#f6f9dd;font-weight:900}
+.note{font-size:12px;color:var(--gray-500);margin-top:12px}
+.key-number{background:var(--gray-100);padding:30px;margin-top:35px}
+.key-number-label{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--gray-500)}
+.key-number-main{font-size:clamp(25px,5vw,38px);font-weight:900;line-height:1.4;margin:10px 0}
+.key-number-main span{background:var(--lime);padding:0 5px}
+.key-number p{margin:0;font-size:13px;color:var(--gray-700)}
+.comparison-bar{margin:30px 0}
+.bar-item{margin-bottom:23px}
+.bar-label{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:800;margin-bottom:8px}
+.bar-track{width:100%;height:19px;background:var(--gray-200)}
+.bar-fill{height:100%;background:var(--black)}
+.bar-fill.lime{background:var(--lime);border-right:2px solid var(--black)}
+.bar-description{font-size:11px;color:var(--gray-500);margin-top:5px}
+.condition-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:30px}
+.condition-card{border:1px solid var(--gray-300);padding:23px}
+.condition-card .small-label{font-size:10px;letter-spacing:.12em;font-weight:900;color:var(--gray-500)}
+.condition-card h3{font-size:17px;font-weight:900;margin:10px 0 15px}
+.condition-stats{display:flex;gap:20px;flex-wrap:wrap}
+.condition-stats div{flex:1;min-width:90px}
+.condition-stats strong{display:block;font-size:25px;font-weight:900;line-height:1.4;font-variant-numeric:tabular-nums}
+.condition-stats span{display:block;font-size:11px;color:var(--gray-500)}
+.condition-card p{font-size:12px;color:var(--gray-700);margin:15px 0 0}
+.info-block{border-left:4px solid var(--black);padding:18px 22px;background:var(--gray-100);margin:25px 0}
+.info-block strong{display:block;font-size:14px;margin-bottom:6px}
+.info-block p{margin:0;font-size:13px;color:var(--gray-700)}
+.caveat-list{padding:0;margin:0;list-style:none}
+.caveat-list li{padding:17px 0 17px 27px;border-bottom:1px solid var(--gray-200);position:relative;font-size:13px;color:var(--gray-700)}
+.caveat-list li::before{content:"■";color:var(--black);font-size:9px;position:absolute;left:4px;top:21px}
+.caveat-list li:last-child{border-bottom:none}
+.caveat-list strong{color:var(--black)}
+.source-box{background:var(--gray-100);padding:28px}
+.source-box h3{font-size:15px;margin:0 0 15px;font-weight:900}
+.source-list{margin:0;padding-left:20px;font-size:13px;color:var(--gray-700)}
+.source-list li{padding:6px 0}
+.source-list a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.source-list a:hover{opacity:.65}
+.source-note{font-size:12px;color:var(--gray-500);margin-top:20px;border-top:1px solid var(--gray-300);padding-top:15px}
+.conclusion{background:var(--black);color:var(--white);padding:35px;margin-top:40px}
+.conclusion-label{color:var(--lime);font-size:11px;font-weight:900;letter-spacing:.15em}
+.conclusion h3{font-size:22px;line-height:1.5;margin:12px 0 15px;font-weight:900}
+.conclusion p{color:#cccccc;font-size:13px;margin:0}
+.site-footer{background:var(--black);color:var(--white);padding:45px 24px}
+.footer-inner{max-width:var(--max-width);margin:0 auto}
+.footer-logo{font-size:17px;font-weight:900;letter-spacing:.1em;margin-bottom:20px}
+.footer-logo span{color:var(--lime)}
+.footer-disclaimer{color:#bbbbbb;font-size:11px;line-height:2;margin:0 0 16px}
+.copyright{font-size:11px;color:#888888;margin:0;padding-top:15px;border-top:1px solid #333333}
+@media (max-width:650px){main{padding:0 18px 65px}.site-header{padding:18px}.hero{padding:50px 0 38px}.hero h1{font-size:28px}.section{padding:48px 0}.section-heading h2{font-size:21px}.result-grid{grid-template-columns:1fr}.condition-grid{grid-template-columns:1fr}.result-card{padding:22px}.key-number{padding:23px}.conclusion{padding:25px}.header-label{font-size:9px}.hero-meta{gap:8px 14px}.hero-meta span+span::before{margin-right:14px}}
+@media (max-width:380px){.hero h1{font-size:25px}.result-value{font-size:32px}.condition-stats strong{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="portal-bar"><a href="https://ai-kenkyubu.github.io/portal/">AI研究部 PORTAL</a></div>
+<header class="site-header"><div class="header-inner"><div class="site-logo">白黒ラボ<span>日常のモヤモヤ数値化研究所</span></div><div class="header-label">AI研究部 HP実験室<br>VERIFICATION REPORT</div></div></header>
+<main>
+<section class="hero">
+<div class="report-number">REPORT 008</div>
+<div class="category">CATEGORY：#時間・タイパ</div>
+<h1>洗濯乾燥機と「部屋干し＋除湿機」、時間と電気代はどう違う？</h1>
+<div class="hero-meta"><span>2026年11月26日</span><span>白黒ラボ 検証レポート</span></div>
+</section>
+<div class="intro">洗濯物を乾かす方法として、ドラム式洗濯乾燥機と、洗濯後に部屋干しして除湿機で乾燥させる方法を比較した。<strong>所要時間・電気代・洗濯物1kgあたりの電気代</strong>の3つの観点から数値を整理する。なお、今回の比較では試験条件の洗濯物量が異なるため、単純な合計値と重量あたりの数値では結果が異なる。</div>
+
+<section class="section">
+<div class="section-heading"><span class="section-number">01</span><h2>今回の比較結果</h2></div>
+<p class="section-lead">それぞれの試験条件における洗濯から乾燥までの所要時間と電気代。</p>
+<div class="result-grid">
+<div class="result-card featured">
+<div class="result-label">PATTERN A / DRUM TYPE</div><h3>ドラム式洗濯乾燥機</h3>
+<div class="result-main"><span class="result-value">約98<span style="font-size:17px;">分</span></span><span class="result-unit">洗濯〜乾燥まで</span></div>
+<div class="result-sub"><span>電気使用量</span><strong>800Wh</strong></div>
+<div class="result-sub"><span>電気代</span><strong>約24.8円</strong></div>
+<div class="result-sub"><span>洗濯物量</span><strong>6kg</strong></div>
+<div class="work-tag">干す作業なし</div>
+</div>
+<div class="result-card">
+<div class="result-label">PATTERN B / ROOM DRYING</div><h3>部屋干し＋除湿機</h3>
+<div class="result-main"><span class="result-value">約122<span style="font-size:17px;">分</span></span><span class="result-unit">洗濯32分＋乾燥90分</span></div>
+<div class="result-sub"><span>洗濯の電気代</span><strong>約2.1円</strong></div>
+<div class="result-sub"><span>除湿機の電気代</span><strong>約9.7円</strong></div>
+<div class="result-sub"><span>合計電気代</span><strong>約11.8円</strong></div>
+<div class="result-sub"><span>洗濯物量</span><strong>約2kg</strong></div>
+<div class="work-tag">干す作業あり</div>
+</div>
+</div>
+<div class="table-wrap"><table><thead><tr><th>比較項目</th><th>ドラム式</th><th>部屋干し＋除湿機</th></tr></thead><tbody>
+<tr><th>洗濯物量</th><td>6kg</td><td>約2kg</td></tr>
+<tr><th>洗濯時間</th><td>洗濯〜乾燥一体</td><td>約32分</td></tr>
+<tr><th>乾燥時間</th><td>洗濯〜乾燥合計約98分</td><td>約90分</td></tr>
+<tr><th>合計時間</th><td><strong>約98分</strong></td><td><strong>約122分</strong></td></tr>
+<tr><th>電気代</th><td><strong>約24.8円</strong></td><td><strong>約11.8円</strong></td></tr>
+<tr><th>干す作業</th><td>なし</td><td>あり</td></tr>
+</tbody></table></div>
+<p class="note">※電気代は31円/kWhとして計算。各数値は今回のモデルケースに基づく試算値。</p>
+</section>
+<section class="section">
+<div class="section-heading"><span class="section-number">02</span><h2>電気代の内訳</h2></div>
+<p class="section-lead">部屋干し＋除湿機では、洗濯工程と除湿機の運転を分けて電気代を算出している。</p>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>消費電力量</th><th>電気代</th></tr></thead><tbody>
+<tr><th>ドラム式</th><td>800Wh</td><td><strong>約24.8円</strong></td></tr>
+<tr><th>部屋干し・洗濯</th><td>68Wh</td><td>約2.1円</td></tr>
+<tr><th>除湿機・乾燥</th><td>312Wh</td><td>約9.7円</td></tr>
+<tr><th>部屋干し合計</th><td>380Wh</td><td><strong>約11.8円</strong></td></tr>
+</tbody></table></div>
+<div class="comparison-bar">
+<div class="bar-item"><div class="bar-label"><span>ドラム式</span><span>約24.8円</span></div><div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div><div class="bar-description">6kgの洗濯〜乾燥</div></div>
+<div class="bar-item"><div class="bar-label"><span>部屋干し＋除湿機</span><span>約11.8円</span></div><div class="bar-track"><div class="bar-fill lime" style="width:47.6%;"></div></div><div class="bar-description">約2kgの洗濯〜乾燥</div></div>
+</div>
+<div class="info-block"><strong>合計金額だけでは比較できない理由</strong><p>ドラム式は6kg、部屋干し＋除湿機は約2kgという条件であり、処理した洗濯物の量が3倍異なる。部屋干し方式の電気代が安いという結果には、処理量の違いも含まれている。</p></div>
+</section>
+<section class="section">
+<div class="section-heading"><span class="section-number">03</span><h2>1kgあたりの電気代で逆転する</h2></div>
+<p class="section-lead">洗濯物の量を考慮し、電気代を処理重量で割った数値。</p>
+<div class="result-grid">
+<div class="result-card"><div class="result-label">DRUM TYPE</div><h3>ドラム式</h3><div class="result-value">約4.1<span style="font-size:16px;">円/kg</span></div><p class="note">24.8円 ÷ 6kg</p></div>
+<div class="result-card"><div class="result-label">ROOM DRYING</div><h3>部屋干し＋除湿機</h3><div class="result-value">約5.9<span style="font-size:16px;">円/kg</span></div><p class="note">11.8円 ÷ 2kg</p></div>
+</div>
+<div class="key-number"><div class="key-number-label">COST PER KG / RESULT</div><div class="key-number-main"><span>1kgあたりはドラム式が約4.1円</span></div><p>合計電気代では部屋干し＋除湿機が安い一方、1kgあたりではドラム式が約4.1円、部屋干し＋除湿機が約5.9円となり、順位が逆転する。</p></div>
+<div class="table-wrap"><table><thead><tr><th>比較項目</th><th>ドラム式</th><th>部屋干し＋除湿機</th></tr></thead><tbody>
+<tr><th>合計電気代</th><td>約24.8円</td><td class="highlight-cell">約11.8円</td></tr>
+<tr><th>処理重量</th><td>6kg</td><td>約2kg</td></tr>
+<tr><th>1kgあたり</th><td class="highlight-cell">約4.1円</td><td>約5.9円</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="section">
+<div class="section-heading"><span class="section-number">04</span><h2>条件によって結果は変わる</h2></div>
+<p class="section-lead">乾燥時間や電気代は、洗濯物の量、室温、運転モードなどによって変動する。</p>
+<h3 style="font-size:17px;font-weight:900;margin:30px 0 12px;">① 洗濯物の量</h3>
+<p style="font-size:13px;color:var(--gray-700);">今回の比較では、ドラム式が6kg、部屋干し＋除湿機が約2kgである。乾燥対象の重量が異なるため、合計時間や合計電気代を同じ処理量の結果として扱うことはできない。</p>
+<h3 style="font-size:17px;font-weight:900;margin:35px 0 12px;">② 冬の低温環境</h3>
+<p style="font-size:13px;color:var(--gray-700);">除湿機は室温が低くなると除湿能力が変化する。冬の低温環境を想定した10℃の条件では、乾燥時間と電気代が次の数値になるモデルケースがある。</p>
+<div class="condition-grid">
+<div class="condition-card"><div class="small-label">STANDARD CONDITION</div><h3>通常条件</h3><div class="condition-stats"><div><strong>約90分</strong><span>乾燥時間</span></div><div><strong>約9.7円</strong><span>除湿機の電気代</span></div></div><p>今回の基本比較における除湿機の乾燥条件。</p></div>
+<div class="condition-card"><div class="small-label">LOW TEMPERATURE / 10℃</div><h3>冬の低温条件</h3><div class="condition-stats"><div><strong>約135分</strong><span>乾燥時間</span></div><div><strong>約13.1円</strong><span>除湿機の電気代</span></div></div><p>室温10℃を想定した条件。通常条件より乾燥時間と電気代が増加する。</p></div>
+</div>
+<div class="info-block"><strong>低温条件での変化</strong><p>乾燥時間は約90分から約135分へ約45分増加する。除湿機の電気代は約9.7円から約13.1円へ約3.4円増加する。なお、ここで示す電気代は除湿機の乾燥工程分であり、洗濯工程分は別計算となる。</p></div>
+<h3 style="font-size:17px;font-weight:900;margin:40px 0 12px;">③ ドラム式の省エネモード</h3>
+<p style="font-size:13px;color:var(--gray-700);">ドラム式洗濯乾燥機では、省エネモードを使用することで消費電力量が変わる一方、運転時間が長くなるケースがある。</p>
+<div class="condition-grid">
+<div class="condition-card"><div class="small-label">NORMAL MODE</div><h3>通常運転</h3><div class="condition-stats"><div><strong>約98分</strong><span>所要時間</span></div><div><strong>約24.8円</strong><span>電気代</span></div></div></div>
+<div class="condition-card"><div class="small-label">ENERGY SAVING MODE</div><h3>省エネモード</h3><div class="condition-stats"><div><strong>約165分</strong><span>所要時間</span></div><div><strong>約19.2円</strong><span>電気代</span></div></div></div>
+</div>
+<div class="info-block"><strong>省エネモードでの変化</strong><p>通常運転と比較すると、所要時間は約67分長くなる一方、電気代は約5.6円少なくなる。時間と電気代の関係は、選択する運転モードによっても変化する。</p></div>
+<div class="table-wrap"><table><thead><tr><th>条件</th><th>時間</th><th>電気代</th></tr></thead><tbody>
+<tr><th>除湿機・通常</th><td>約90分</td><td>約9.7円</td></tr>
+<tr><th>除湿機・10℃</th><td>約135分</td><td>約13.1円</td></tr>
+<tr><th>ドラム式・通常</th><td>約98分</td><td>約24.8円</td></tr>
+<tr><th>ドラム式・省エネ</th><td>約165分</td><td>約19.2円</td></tr>
+</tbody></table></div>
+<p class="note">※各条件の数値は、それぞれのモデルケースにおける試算値。異なる機種・運転条件の数値をそのまま横並びにした実測ランキングではない。</p>
+</section>
+<section class="section">
+<div class="section-heading"><span class="section-number">05</span><h2>注意点</h2></div>
+<ul class="caveat-list">
+<li><strong>洗濯物の重量が異なる。</strong><br>ドラム式は6kg、部屋干し＋除湿機は約2kgであり、同じ量を処理した比較ではない。</li>
+<li><strong>干す作業の時間は含まれていない。</strong><br>部屋干し方式では、洗濯終了後に洗濯物を取り出し、ハンガーなどに干す作業が発生する。今回の約122分には、この作業時間を含めていない。</li>
+<li><strong>乾燥時間は環境によって変わる。</strong><br>室温、湿度、換気、洗濯物の素材、衣類の配置、設置条件などによって所要時間は変動する。</li>
+<li><strong>機種によって消費電力量が異なる。</strong><br>ドラム式のヒートポンプ方式・ヒーター方式や、除湿機のコンプレッサー方式・デシカント方式などによって消費電力量は異なる。</li>
+<li><strong>乾燥の仕上がりは同一ではない。</strong><br>シワ、衣類の縮み、乾燥ムラ、衣類の素材との相性などは、乾燥方式や設定によって異なる。</li>
+<li><strong>電気代以外の費用は含めていない。</strong><br>本試算では本体価格、購入費用、設置費用、修理費用、フィルターなどの消耗品費用、水道代、洗剤代は比較対象外としている。</li>
+<li><strong>省エネモードは時間とのトレードオフがある。</strong><br>電気代が減少する場合でも、運転時間が長くなることがある。通常モードと省エネモードでは、時間と消費電力量の関係が異なる。</li>
+</ul>
+</section>
+<section class="section">
+<div class="section-heading"><span class="section-number">06</span><h2>前提・出典</h2></div>
+<div class="source-box">
+<h3>試算の前提条件</h3>
+<div class="table-wrap" style="margin:0 0 25px;background:white;"><table><tbody>
+<tr><th>電気料金単価</th><td><strong>31円/kWh</strong></td></tr>
+<tr><th>ドラム式の洗濯物量</th><td>6kg</td></tr>
+<tr><th>ドラム式の消費電力量</th><td>800Wh</td></tr>
+<tr><th>ドラム式の所要時間</th><td>約98分</td></tr>
+<tr><th>部屋干しの洗濯物量</th><td>約2kg</td></tr>
+<tr><th>部屋干しの洗濯時間</th><td>約32分</td></tr>
+<tr><th>除湿機の乾燥時間</th><td>約90分</td></tr>
+<tr><th>電気代の計算式</th><td>消費電力量（kWh）×31円</td></tr>
+</tbody></table></div>
+<h3>参照した基準・メーカー公式情報</h3>
+<ol class="source-list">
+<li><strong>JEMA（一般社団法人 日本電機工業会）</strong><br>洗濯機・衣類乾燥機の性能表示および試験条件に関する基準・関連情報。<br><a href="https://www.jema-net.or.jp/" target="_blank" rel="noopener noreferrer">JEMA公式サイト</a></li>
+<li><strong>Panasonic（パナソニック）</strong><br>ドラム式洗濯乾燥機および衣類乾燥除湿機の製品仕様、消費電力量、標準運転時間、省エネ運転に関する公式情報。<br><a href="https://panasonic.jp/wash/" target="_blank" rel="noopener noreferrer">Panasonic 洗濯機・衣類乾燥機公式サイト</a></li>
+<li><strong>SHARP（シャープ）</strong><br>衣類乾燥除湿機の製品仕様、除湿能力、消費電力、運転条件に関する公式情報。<br><a href="https://jp.sharp/" target="_blank" rel="noopener noreferrer">SHARP公式サイト</a></li>
+</ol>
+<div class="source-note">※メーカー公式サイトの製品仕様・公開情報を参照するためのリンク。掲載した比較数値は、各メーカーの同一条件による直接比較結果を意味するものではない。電気料金単価31円/kWhは本レポート内の計算前提であり、実際の契約料金とは異なる場合がある。</div>
+</div>
+</section>
+<section class="conclusion">
+<div class="conclusion-label">REPORT 008 / SUMMARY</div>
+<h3>合計電気代と、1kgあたりの電気代では結果が異なる。</h3>
+<p>今回のモデルケースでは、ドラム式が約98分・約24.8円、部屋干し＋除湿機が約122分・約11.8円となった。ただし、処理重量はそれぞれ6kgと約2kgである。重量あたりに換算するとドラム式が約4.1円/kg、部屋干し＋除湿機が約5.9円/kgとなる。さらに、冬の低温環境や省エネモードによって所要時間と電気代は変化する。比較結果は処理量と運転条件を踏まえて解釈する必要がある。</p>
+</section>
+</main>
+<footer class="site-footer"><div class="footer-inner">
+<div class="footer-logo"><span>白黒</span>ラボ</div>
+<p class="footer-disclaimer">AIを使用して運営しています。価格・料金は調査時点のものです。試算はモデルケースであり、実際の損得は条件によって変わります。特定のサービス・商品を推奨するものではありません。</p>
+<p class="copyright">© 2026 AI研究部 白黒ラボ（AI研究部 HP実験室）</p>
+</div></footer>
+</body>
+</html>
