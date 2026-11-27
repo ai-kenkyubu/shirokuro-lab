@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="エアコンはつけっぱなしの方が安いのか。ダイキンの冬・夏の実験データをもとに、消費電力量と電気代を比較検証します。">
+<meta property="og:title" content="エアコンは「つけっぱなし」が安いは本当か？｜AI研究部 白黒ラボ">
+<meta property="og:description" content="冬の暖房実験では、30分間隔の入り切りが24時間23.9kWh、つけっぱなしが16.1kWhでした。一方、生活パターンに合わせた停止では差は約30円でした。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ai-kenkyubu.github.io/shirokuro-lab/report-009.html">
+<meta property="og:image" content="https://ai-kenkyubu.github.io/shirokuro-lab/header.webp">
+<meta name="twitter:card" content="summary_large_image">
+<title>エアコンは「つけっぱなし」が安いは本当か？｜REPORT 009｜白黒ラボ</title>
+<style>
+:root{--black:#111111;--dark:#222222;--gray-900:#333333;--gray-700:#555555;--gray-500:#888888;--gray-300:#cccccc;--gray-200:#e5e5e5;--gray-100:#f3f3f3;--white:#ffffff;--lime:#E8FF47;--content:1080px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--black);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Yu Gothic",YuGothic,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;font-size:15px;line-height:1.85;overflow-wrap:break-word}
+a{color:inherit}
+.portal-bar{background:var(--black);color:var(--lime);padding:11px 20px;font-size:12px;font-weight:800;letter-spacing:.1em}
+.portal-inner{max-width:var(--content);margin:0 auto}
+.portal-bar a{display:inline-flex;align-items:center;gap:10px;color:var(--lime);text-decoration:none}
+.portal-bar a::before{content:"←";font-size:16px}
+.portal-bar a:hover{opacity:.7}
+.site-header{border-bottom:1px solid var(--gray-200);padding:22px 20px}
+.header-inner{max-width:var(--content);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.site-logo{font-size:18px;font-weight:900;letter-spacing:.08em}
+.site-logo span{display:block;color:var(--gray-500);font-size:10px;font-weight:600;letter-spacing:.16em;line-height:1.5}
+.header-label{font-size:10px;font-weight:800;letter-spacing:.15em;color:var(--gray-500)}
+main{max-width:var(--content);margin:0 auto;padding:48px 20px 100px}
+.article-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:25px;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gray-500)}
+.report-number{background:var(--black);color:var(--lime);padding:5px 11px;font-size:11px;font-weight:900;letter-spacing:.12em}
+.category{border:1px solid var(--gray-300);padding:3px 10px;color:var(--gray-700)}
+h1{margin:0;max-width:900px;font-size:clamp(30px,5.2vw,54px);line-height:1.35;letter-spacing:-.045em;font-weight:900}
+.lead{max-width:760px;margin:24px 0 0;color:var(--gray-700);font-size:16px;line-height:2}
+.title-line{width:64px;height:6px;background:var(--lime);margin:30px 0 42px}
+.hero-visual{position:relative;min-height:260px;background:var(--black);color:var(--white);padding:38px 42px;display:flex;align-items:center;justify-content:space-between;gap:30px;overflow:hidden}
+.hero-visual::after{content:"009";position:absolute;right:10px;bottom:-75px;color:rgba(255,255,255,.06);font-size:240px;font-weight:900;line-height:1;pointer-events:none}
+.hero-copy{position:relative;z-index:1;max-width:500px}
+.hero-kicker{color:var(--lime);font-size:11px;font-weight:900;letter-spacing:.2em}
+.hero-copy h2{font-size:clamp(22px,3vw,34px);line-height:1.45;margin:12px 0}
+.hero-copy p{color:#cccccc;font-size:13px;margin:0}
+.hero-stat{position:relative;z-index:1;min-width:200px;text-align:center}
+.hero-stat strong{display:block;color:var(--lime);font-size:clamp(50px,7vw,76px);line-height:1.1;font-weight:900;letter-spacing:-.06em}
+.hero-stat span{display:block;margin-top:8px;font-size:12px;color:#cccccc;font-weight:700}
+.content-layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:58px;margin-top:64px}
+.article-content{min-width:0}
+.toc{position:sticky;top:24px;align-self:start;border-top:4px solid var(--black);background:var(--gray-100);padding:20px}
+.toc-title{margin:0 0 14px;font-size:12px;font-weight:900;letter-spacing:.12em}
+.toc ol{padding-left:18px;margin:0}
+.toc li{padding:5px 0;font-size:12px;color:var(--gray-700)}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+section{margin-bottom:64px;scroll-margin-top:25px}
+.section-heading{display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:2px solid var(--black);margin-bottom:25px}
+.section-number{color:var(--gray-500);font-size:13px;font-weight:900;letter-spacing:.12em}
+.section-heading h2{margin:0;font-size:23px;font-weight:900;letter-spacing:-.03em}
+h3{font-size:17px;font-weight:900;margin:30px 0 12px}
+p{margin:0 0 17px}
+.result-card{background:var(--gray-100);border-left:5px solid var(--lime);padding:25px 27px;margin:24px 0}
+.result-label{display:inline-block;background:var(--black);color:var(--lime);padding:3px 9px;font-size:10px;font-weight:900;letter-spacing:.12em;margin-bottom:12px}
+.result-card p{margin:0;font-size:16px;font-weight:700}
+.result-card strong{font-size:25px;font-weight:900}
+.big-comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:25px 0}
+.comparison-item{padding:20px;background:var(--gray-100);border:1px solid var(--gray-200)}
+.comparison-item.featured{background:var(--black);color:var(--white);border-color:var(--black)}
+.comparison-item .item-label{display:block;font-size:11px;font-weight:700;color:var(--gray-500);margin-bottom:8px}
+.comparison-item.featured .item-label{color:var(--lime)}
+.comparison-item strong{display:block;font-size:clamp(27px,4vw,38px);font-weight:900;line-height:1.2;letter-spacing:-.04em}
+.comparison-item small{display:block;margin-top:7px;font-size:12px;color:var(--gray-500)}
+.comparison-item.featured small{color:#cccccc}
+.table-wrap{width:100%;overflow-x:auto;margin:20px 0 12px;border:1px solid var(--gray-200)}
+table{width:100%;min-width:530px;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:12px 14px;font-weight:900;background:var(--gray-100);font-size:12px}
+th,td{padding:13px 14px;text-align:right;border-bottom:1px solid var(--gray-200);white-space:nowrap}
+th{background:var(--black);color:var(--white);font-size:11px;font-weight:800}
+th:first-child,td:first-child{text-align:left}
+td{color:var(--gray-900)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr.total{background:var(--gray-100);font-weight:900}
+tbody tr.total td{color:var(--black)}
+.highlight-cell{background:#f1f6d8;font-weight:900}
+.table-note{color:var(--gray-500);font-size:11px;margin:8px 0 22px}
+.bar-chart{margin:26px 0;padding:23px;background:var(--gray-100)}
+.chart-title{font-size:13px;font-weight:900;margin-bottom:22px}
+.bar-row{margin-bottom:20px}
+.bar-label{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:700;margin-bottom:7px}
+.bar-track{height:17px;background:#dddddd;overflow:hidden}
+.bar-fill{height:100%;background:var(--black)}
+.bar-fill.lime{background:#b5c927}
+.bar-value{font-size:11px;color:var(--gray-500);margin-top:5px}
+.chart-legend{display:flex;flex-wrap:wrap;gap:15px;margin-top:20px;font-size:11px;color:var(--gray-700)}
+.legend-dot{display:inline-block;width:10px;height:10px;margin-right:5px;background:var(--black)}
+.legend-dot.lime{background:#b5c927}
+.data-note{padding:18px 20px;background:var(--gray-100);border:1px solid var(--gray-200);font-size:13px;color:var(--gray-700);margin:22px 0}
+.data-note strong{color:var(--black)}
+.condition-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+.condition-item{border:1px solid var(--gray-200);padding:18px}
+.condition-item strong{display:block;font-size:14px;margin-bottom:6px}
+.condition-item p{margin:0;color:var(--gray-700);font-size:12px}
+.caution-list{list-style:none;padding:0;margin:20px 0}
+.caution-list li{position:relative;padding:13px 12px 13px 34px;border-bottom:1px solid var(--gray-200);font-size:13px}
+.caution-list li::before{content:"!";position:absolute;left:7px;top:13px;width:17px;height:17px;background:var(--black);color:var(--lime);font-size:11px;font-weight:900;text-align:center;line-height:17px}
+.source-box{background:var(--gray-100);padding:22px;margin-top:25px}
+.source-box h3{margin:0 0 13px;font-size:14px}
+.source-box ul{padding-left:20px;margin:0}
+.source-box li{margin:9px 0;font-size:12px}
+.source-box a{color:var(--gray-700);text-decoration:underline;overflow-wrap:anywhere}
+.source-box a:hover{color:var(--black)}
+.source-description{color:var(--gray-500);font-size:11px}
+.article-end{border-top:1px solid var(--gray-200);padding-top:24px;color:var(--gray-500);font-size:11px}
+footer{background:var(--black);color:var(--white);padding:38px 20px}
+.footer-inner{max-width:var(--content);margin:0 auto}
+.footer-brand{font-size:17px;font-weight:900;letter-spacing:.08em;margin-bottom:18px}
+.footer-brand span{color:var(--lime)}
+.footer-disclaimer{max-width:850px;color:#bbbbbb;font-size:11px;line-height:1.9;margin-bottom:20px}
+.footer-copy{border-top:1px solid #444444;padding-top:17px;color:#999999;font-size:10px;letter-spacing:.04em}
+@media (max-width:760px){main{padding:35px 18px 70px}.content-layout{grid-template-columns:1fr;gap:35px;margin-top:40px}.toc{position:static;order:-1}.toc ol{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}.hero-visual{padding:28px 24px;min-height:230px}.hero-stat{min-width:130px}.hero-visual::after{font-size:160px}.condition-grid{grid-template-columns:1fr}}
+@media (max-width:480px){body{font-size:14px}.site-header{padding:16px 18px}.site-logo{font-size:16px}.header-label{font-size:9px}main{padding:30px 16px 55px}.article-meta{gap:8px}h1{font-size:31px}.lead{font-size:14px}.hero-visual{display:block;padding:25px 22px}.hero-stat{text-align:left;margin-top:25px}.hero-stat strong{font-size:53px}.big-comparison{gap:8px}.comparison-item{padding:14px 12px}.comparison-item strong{font-size:27px}.section-heading h2{font-size:20px}.toc ol{grid-template-columns:1fr}.result-card{padding:20px}.bar-chart{padding:17px 13px}}
+@media print{.portal-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact}.toc{display:none}.content-layout{display:block}main{padding-top:20px}section{break-inside:avoid}footer{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="portal-bar"><div class="portal-inner"><a href="https://ai-kenkyubu.github.io/portal/">AI研究部 ポータルへ戻る</a></div></div>
+<header class="site-header"><div class="header-inner"><div class="site-logo">AI研究部 白黒ラボ<span>DAILY LIFE × DATA ANALYSIS</span></div><div class="header-label">VERIFICATION REPORT</div></div></header>
+<main>
+<div class="article-meta"><span class="report-number">REPORT 009</span><span class="category">#生活の通説</span><time datetime="2026-11-27">2026.11.27</time></div>
+<h1>エアコンは「つけっぱなし」が安いは本当か？</h1>
+<p class="lead">エアコンは、こまめに消すよりもつけっぱなしの方が電気代を抑えられる。そんな説は本当なのか。冬の暖房と夏の冷房について、メーカーの実験データから消費電力量と電気代の違いを検証する。</p>
+<div class="title-line"></div>
+<div class="hero-visual"><div class="hero-copy"><div class="hero-kicker">WINTER EXPERIMENT / RESULT</div><h2>冬の暖房では、<br>つけっぱなしが優勢。</h2><p>30分間隔で入り切りする運転との24時間比較</p></div><div class="hero-stat"><strong>-32.6%</strong><span>消費電力量の差</span></div></div>
+<div class="content-layout"><article class="article-content">
+<section id="conclusion">
+<div class="section-heading"><span class="section-number">01</span><h2>検証結果・結論</h2></div>
+<div class="result-card"><span class="result-label">WINTER / EXPERIMENT 01</span><p>冬の暖房実験では、30分間隔で入り切りした場合の24時間消費電力量が23.9kWh、つけっぱなしでは16.1kWh。つけっぱなしの方が<strong>約32.6%少ない</strong>結果となった。</p></div>
+<div class="big-comparison"><div class="comparison-item featured"><span class="item-label">つけっぱなし</span><strong>16.1<small style="display:inline;font-size:15px;color:#fff;"> kWh</small></strong><small>電気代 435円</small></div><div class="comparison-item"><span class="item-label">30分間隔で入り切り</span><strong>23.9<small style="display:inline;font-size:15px;"> kWh</small></strong><small>電気代 645円</small></div></div>
+<p>ただし、就寝や外出に合わせて運転を止める生活パターンでは、結果が異なる。24時間の比較では、つけっぱなし12.7kWh（343円）に対し、入り切り11.6kWh（313円）となった。</p>
+<div class="result-card"><span class="result-label">WINTER / EXPERIMENT 02</span><p>生活パターンに合わせた停止では、入り切りの方が<strong>約30円安い</strong>結果となった。停止時間は合計13時間だった。</p></div>
+<p>つまり、「つけっぱなしが必ず安い」という結果ではない。運転を止める時間や外気温などの条件によって、電気代の大小関係は変化している。</p>
+</section>
+<section id="experiment1">
+<div class="section-heading"><span class="section-number">02</span><h2>冬の実験①｜30分間隔で入り切り</h2></div>
+<p>ダイキン工業が京都市内のマンションで行った暖房実験。暖房設定24℃の条件で、エアコンを24時間つけっぱなしにした場合と、30分間隔で運転を入り切りした場合の消費電力量を比較している。</p>
+<h3>時間帯別の消費電力量・電気代</h3>
+<div class="table-wrap"><table><caption>比較表1｜冬・実験①（電気代27円/kWh換算）</caption><thead><tr><th>時間帯</th><th>つけっぱなし</th><th>30分間隔で入り切り</th></tr></thead><tbody>
+<tr><td>深夜〜早朝</td><td class="highlight-cell">5.0kWh / 135円</td><td>8.5kWh / 230円</td></tr>
+<tr><td>日中</td><td class="highlight-cell">7.8kWh / 211円</td><td>11.2kWh / 302円</td></tr>
+<tr><td>夜間</td><td class="highlight-cell">3.3kWh / 89円</td><td>4.2kWh / 113円</td></tr>
+<tr class="total"><td>合計</td><td>16.1kWh / 435円</td><td>23.9kWh / 645円</td></tr>
+</tbody></table></div>
+<p class="table-note">※電気代は27円/kWhで換算。各時間帯の金額は公表値の丸めを含む。</p>
+<div class="bar-chart"><div class="chart-title">24時間の消費電力量を比較</div>
+<div class="bar-row"><div class="bar-label"><span>つけっぱなし</span><span>16.1kWh</span></div><div class="bar-track"><div class="bar-fill lime" style="width:67.36%"></div></div><div class="bar-value">435円</div></div>
+<div class="bar-row"><div class="bar-label"><span>30分間隔で入り切り</span><span>23.9kWh</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-value">645円</div></div>
+<div class="chart-legend"><span><i class="legend-dot lime"></i>つけっぱなし</span><span><i class="legend-dot"></i>入り切り</span></div></div>
+<p>すべての時間帯で、つけっぱなしの消費電力量が少なかった。合計では7.8kWhの差があり、電気代に換算すると約210円の差となる。</p>
+<div class="data-note"><strong>電気料金単価を31円/kWhとした場合</strong><br>同じ消費電力量で再計算すると、つけっぱなしは約499円、30分間隔で入り切りした場合は約741円となる。料金単価によって金額は変わるが、消費電力量の差そのものは変わらない。</div>
+</section>
+<section id="experiment2">
+<div class="section-heading"><span class="section-number">03</span><h2>冬の実験②｜実際の生活パターン</h2></div>
+<p>30分間隔で機械的に運転を切り替えるのではなく、就寝や外出に合わせてエアコンを停止する生活パターンでも比較が行われた。</p>
+<h3>生活パターンでの比較</h3>
+<div class="table-wrap"><table><caption>比較表2｜冬・実験②（電気代27円/kWh換算）</caption><thead><tr><th>比較項目</th><th>つけっぱなし</th><th>入り切り</th></tr></thead><tbody>
+<tr><td>夜間（2時間外出）</td><td>3.4kWh / 92円</td><td class="highlight-cell">2.4kWh / 65円</td></tr>
+<tr class="total"><td>24時間合計</td><td>12.7kWh / 343円</td><td>11.6kWh / 313円</td></tr>
+</tbody></table></div>
+<p class="table-note">※夜間の2時間外出時の比較と、24時間合計の比較。</p>
+<div class="big-comparison"><div class="comparison-item"><span class="item-label">つけっぱなし</span><strong>343円</strong><small>12.7kWh / 24時間</small></div><div class="comparison-item featured"><span class="item-label">生活パターンで入り切り</span><strong>313円</strong><small>11.6kWh / 24時間</small></div></div>
+<p>このケースでは、入り切りの方が約30円安かった。停止時間は合計13時間あったが、つけっぱなしとの電気代の差は約30円にとどまった。</p>
+<p>実験①のように短い間隔で何度も運転を切り替えるケースと、就寝や外出というまとまった時間に停止するケースでは、結果が異なっている。</p>
+</section>
+<section id="summer">
+<div class="section-heading"><span class="section-number">04</span><h2>夏の冷房ではどうなる？</h2></div>
+<p>冬の暖房とは異なり、夏の冷房では外出時間が一定の長さを超えると、つけっぱなしよりも停止した方が消費電力量を抑えられる。</p>
+<p>ダイキン工業の夏の実験では、冷房26℃の条件で、つけっぱなしの方が消費電力量が少なくなる外出時間の目安が示されている。</p>
+<div class="result-card"><span class="result-label">SUMMER / COOLING 26℃</span><p>つけっぱなしの方が少なくなる外出時間の目安は、<strong>日中約35分まで</strong>、<strong>夜約18分まで</strong>。</p></div>
+<h3>生活パターン1日での比較</h3>
+<div class="table-wrap"><table><caption>比較表3｜夏・冷房26℃（ダイキン実験）</caption><thead><tr><th>運転パターン</th><th>消費電力量</th></tr></thead><tbody>
+<tr><td>つけっぱなし</td><td>5.7kWh</td></tr>
+<tr><td>外出時OFF</td><td class="highlight-cell">4.4kWh</td></tr>
+</tbody></table></div>
+<div class="bar-chart"><div class="chart-title">夏の生活パターン・消費電力量</div>
+<div class="bar-row"><div class="bar-label"><span>つけっぱなし</span><span>5.7kWh</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+<div class="bar-row"><div class="bar-label"><span>外出時OFF</span><span>4.4kWh</span></div><div class="bar-track"><div class="bar-fill lime" style="width:77.19%"></div></div></div>
+<div class="chart-legend"><span><i class="legend-dot"></i>つけっぱなし</span><span><i class="legend-dot lime"></i>外出時OFF</span></div></div>
+<p>1日の生活パターンでは、外出時に停止した方が1.3kWh少なかった。冬の暖房実験①とは異なり、夏の冷房では外出時間や時間帯によって、停止した方が有利になるケースが確認されている。</p>
+</section>
+<section id="mechanism">
+<div class="section-heading"><span class="section-number">05</span><h2>なぜ結果が変わるのか？</h2></div>
+<p>エアコンの消費電力量は、運転中に一定ではない。室温を設定温度に近づけるまでの負荷と、設定温度を維持するための負荷が異なるため、運転を止める時間や外気温によって結果が変わる。</p>
+<div class="condition-grid">
+<div class="condition-item"><strong>01｜起動直後の電力</strong><p>運転開始直後は、室温を設定温度に近づけるために大きな電力を必要とする。停止と再起動を繰り返すと、この負荷が発生する。</p></div>
+<div class="condition-item"><strong>02｜冬の外気温と設定温度</strong><p>外気温と設定温度の差が大きい冬は、停止中に下がった室温を再び温める負荷が大きくなる。</p></div>
+<div class="condition-item"><strong>03｜夜間の外気温</strong><p>夜は外気温が下がり、冷暖房の負荷や室温の変化が日中とは異なる。そのため、つけっぱなしと停止の分かれ目となる時間が短くなる場合がある。</p></div>
+<div class="condition-item"><strong>04｜停止時間の長さ</strong><p>停止時間が長くなると、運転を維持するための消費電力量を抑えられる。一方、再起動時には室温を戻すための電力が必要になる。</p></div>
+</div>
+<div class="data-note"><strong>ポイント：</strong><br>つけっぱなしと停止のどちらが少ないかは、再起動時の負荷と、停止中に発生しない運転電力とのバランスで決まる。冬・夏、昼・夜、外出時間によって結果が変化する。</div>
+</section>
+<section id="caution">
+<div class="section-heading"><span class="section-number">06</span><h2>実験結果を見る際の注意点</h2></div>
+<ul class="caution-list">
+<li><strong>建物の条件：</strong>実験は特定の建物と気象条件で行われたものであり、断熱性能や気密性能、部屋の広さによって消費電力量は変わる。</li>
+<li><strong>エアコンの機種：</strong>機種ごとの性能や制御方式によって、起動時の消費電力や運転中の電力は異なる。</li>
+<li><strong>気象条件：</strong>外気温や日射、湿度などによって冷暖房の負荷は変わる。実験時と異なる気象条件では、同じ結果になるとは限らない。</li>
+<li><strong>熱帯夜の快適性：</strong>夏の夜間は、電気代だけでなく睡眠時の快適性も関係する。熱帯夜では室温や体感温度なども含めた判断が必要になる。</li>
+<li><strong>風量設定：</strong>紹介した実験では風量は自動設定だった。風量や運転モードが異なる場合は、消費電力量も変わる可能性がある。</li>
+</ul>
+</section>
+<section id="summary">
+<div class="section-heading"><span class="section-number">07</span><h2>検証データの整理</h2></div>
+<div class="table-wrap"><table><caption>今回の検証結果一覧</caption><thead><tr><th>実験条件</th><th>つけっぱなし</th><th>入り切り・停止</th><th>結果</th></tr></thead><tbody>
+<tr><td>冬①・30分間隔</td><td>16.1kWh</td><td>23.9kWh</td><td>つけっぱなしが少ない</td></tr>
+<tr><td>冬②・生活パターン</td><td>12.7kWh</td><td>11.6kWh</td><td>入り切りが少ない</td></tr>
+<tr><td>夏・生活パターン</td><td>5.7kWh</td><td>4.4kWh</td><td>外出時OFFが少ない</td></tr>
+</tbody></table></div>
+<p class="table-note">※冬①・冬②は暖房、夏は冷房。各実験の条件は異なるため、消費電力量の単純な横比較には適さない。</p>
+<div class="result-card"><span class="result-label">REPORT 009 / FINDINGS</span><p>冬の30分間隔の入り切りでは、つけっぱなしの消費電力量が約32.6%少なかった。一方、生活パターンに合わせた停止では約30円の差で入り切りが少なく、夏の生活パターンでも外出時OFFの消費電力量が少なかった。</p></div>
+<p>「エアコンはつけっぱなしの方が安い」という通説は、すべての条件に当てはまるものではない。今回のデータでは、季節、時間帯、停止時間、建物や機種などの条件によって結果が変わることが確認できた。</p>
+</section>
+<section id="sources">
+<div class="section-heading"><span class="section-number">08</span><h2>調査条件・出典</h2></div>
+<h3>冬の暖房実験</h3>
+<p>ダイキン工業による実験。京都市内のマンション2部屋、14.1帖、暖房設定24℃。実験時の最高気温は6.8℃。電気代は27円/kWhで換算。</p>
+<h3>夏の冷房実験</h3>
+<p>ダイキン工業による実験。冷房設定26℃、実験時の最高気温は36.3℃。日中と夜間の外出時間による消費電力量の違いを比較。</p>
+<div class="source-box"><h3>参考資料・一次情報</h3><ul>
+<li><strong>ダイキン工業｜2018年2月16日 プレスリリース</strong><br><a href="https://www.daikin.co.jp/press/2018/20180216" target="_blank" rel="noopener noreferrer">https://www.daikin.co.jp/press/2018/20180216</a></li>
+<li><strong>ダイキン工業｜エアコンの使い方・MISSION 05</strong><br><a href="https://www.daikin.co.jp/air/life/issue/mission05" target="_blank" rel="noopener noreferrer">https://www.daikin.co.jp/air/life/issue/mission05</a></li>
+</ul><p class="source-description">※本記事は上記の公開情報をもとに数値を整理・比較したもの。電気代は指定された単価による試算であり、実際の請求額とは異なる場合がある。</p></div>
+</section>
+<div class="article-end">REPORT 009 / #生活の通説 / 2026.11.27<br>AI研究部 白黒ラボ｜日常のモヤモヤ数値化研究所</div>
+</article>
+<aside class="toc"><p class="toc-title">CONTENTS / 目次</p><ol>
+<li><a href="#conclusion">検証結果・結論</a></li>
+<li><a href="#experiment1">冬の実験①</a></li>
+<li><a href="#experiment2">冬の実験②</a></li>
+<li><a href="#summer">夏の冷房</a></li>
+<li><a href="#mechanism">結果が変わる理由</a></li>
+<li><a href="#caution">実験の注意点</a></li>
+<li><a href="#sources">調査条件・出典</a></li>
+</ol></aside>
+</div>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand">AI研究部 <span>白黒ラボ</span></div>
+<p class="footer-disclaimer">AIを使用して運営しています。価格・料金は調査時点のものです。試算はモデルケースであり、実際の損得は条件によって変わります。特定のサービス・商品を推奨するものではありません。</p>
+<div class="footer-copy">© 2026 AI研究部 白黒ラボ（AI研究部 HP実験室）</div></div></footer>
+</body>
+</html>
