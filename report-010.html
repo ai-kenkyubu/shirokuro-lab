@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ふるさと納税の控除上限額、返礼品の価値、自己負担額をモデルケースで比較する検証レポート。">
+<title>ふるさと納税は実質2,000円でどれくらいの価値を受け取れるのか？｜白黒ラボ</title>
+<style>
+:root{
+  --black:#111;--ink:#191919;--gray-900:#303030;--gray-700:#555;--gray-500:#777;
+  --gray-300:#d5d5d5;--gray-200:#e8e8e8;--gray-100:#f4f4f1;--white:#fff;
+  --lime:#E8FF47;--max:1040px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;line-height:1.85}
+a{color:inherit}
+.portal{display:block;background:var(--black);color:var(--lime);padding:12px 20px;text-decoration:none;font-size:.88rem;font-weight:800;letter-spacing:.04em}
+.portal span{max-width:var(--max);display:block;margin:auto}
+.portal:hover{text-decoration:underline}
+.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+.topline{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:34px 0 18px;border-bottom:1px solid var(--gray-200)}
+.brand{font-size:.82rem;font-weight:900;letter-spacing:.12em}
+.brand-mark{display:inline-block;background:var(--lime);color:var(--black);padding:2px 8px;margin-right:7px}
+.meta{display:flex;gap:9px;align-items:center;flex-wrap:wrap;color:var(--gray-500);font-size:.82rem}
+.tag{border:1px solid var(--gray-300);padding:2px 9px;color:var(--gray-700);font-weight:700}
+.hero{padding:52px 0 42px}
+.eyebrow{font-size:.82rem;font-weight:900;letter-spacing:.14em;color:var(--gray-500);text-transform:uppercase}
+h1{font-size:clamp(2rem,5vw,3.55rem);line-height:1.28;letter-spacing:-.045em;margin:14px 0 20px;font-weight:900}
+.lead{font-size:1.08rem;color:var(--gray-700);max-width:800px;margin:0}
+.rule{height:8px;background:var(--lime);width:72px;margin:30px 0 0}
+main{padding-bottom:72px}
+section{padding:42px 0;border-bottom:1px solid var(--gray-200)}
+h2{font-size:1.55rem;line-height:1.4;margin:0 0 22px;font-weight:900;letter-spacing:-.025em}
+h2:before{content:"";display:inline-block;width:9px;height:25px;background:var(--lime);margin-right:12px;vertical-align:-4px}
+h3{font-size:1.08rem;margin:28px 0 10px;font-weight:850}
+p{margin:0 0 14px}
+.summary{background:var(--black);color:#fff;padding:30px clamp(20px,4vw,38px);position:relative}
+.summary:before{content:"結論";position:absolute;top:0;right:0;background:var(--lime);color:var(--black);font-size:.78rem;font-weight:900;padding:5px 13px}
+.summary p{font-size:1.05rem;margin:0;max-width:900px}
+.summary strong{color:var(--lime);font-size:1.22em}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.metric{background:#292929;padding:18px;border:1px solid #444}
+.metric small{display:block;color:#c8c8c8;font-size:.78rem}
+.metric b{display:block;color:var(--lime);font-size:clamp(1.3rem,3vw,1.9rem);line-height:1.35;margin-top:5px}
+.table-wrap{overflow-x:auto;border:1px solid var(--gray-300)}
+table{width:100%;border-collapse:collapse;min-width:650px;font-size:.93rem}
+th,td{padding:14px 15px;text-align:right;border-bottom:1px solid var(--gray-200);white-space:nowrap}
+th{background:var(--black);color:#fff;font-weight:800;font-size:.82rem}
+th:first-child,td:first-child{text-align:left}
+tbody tr:nth-child(even){background:var(--gray-100)}
+tbody tr:last-child td{border-bottom:0}
+td strong{font-weight:900}
+.note{font-size:.82rem;color:var(--gray-500);margin-top:10px}
+.callout{border-left:5px solid var(--lime);background:var(--gray-100);padding:20px 22px;margin:20px 0}
+.callout strong{font-weight:900}
+.formula{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0;padding:18px;background:var(--gray-100);font-weight:850}
+.formula .minus{color:var(--gray-500);font-size:1.2rem}
+.formula .result{background:var(--lime);padding:6px 12px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.info-card{border:1px solid var(--gray-300);padding:20px}
+.info-card h3{margin:0 0 8px}
+.info-card p:last-child{margin-bottom:0}
+ul{padding-left:1.25em;margin:10px 0}
+li{margin:7px 0}
+ol.steps{padding:0;list-style:none;counter-reset:step}
+ol.steps li{counter-increment:step;display:grid;grid-template-columns:38px 1fr;gap:12px;margin:0;padding:16px 0;border-bottom:1px solid var(--gray-200)}
+ol.steps li:before{content:counter(step,decimal-leading-zero);font-weight:900;background:var(--lime);color:var(--black);text-align:center;padding:3px 0;height:30px}
+.source-list a{text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}
+.source-list li{margin:12px 0}
+footer{background:var(--black);color:#fff;padding:34px 0 28px;font-size:.8rem}
+footer p{color:#d0d0d0;margin:0 0 10px}
+footer .copyright{color:var(--lime);font-weight:800;margin-top:18px}
+@media(max-width:700px){
+ .wrap{width:min(100% - 28px,var(--max))}
+ .hero{padding:38px 0 32px}
+ section{padding:32px 0}
+ .metrics{grid-template-columns:1fr}
+ .grid2{grid-template-columns:1fr}
+ h2{font-size:1.35rem}
+ .summary{padding:28px 20px}
+}
+@media print{
+ .portal{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .summary,th,footer{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ body{font-size:10pt}
+ section{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="portal" href="https://ai-kenkyubu.github.io/portal/"><span>AI研究部 PORTAL　↗　ポータルへ戻る</span></a>
+
+<div class="wrap">
+  <div class="topline">
+    <div class="brand"><span class="brand-mark">白黒</span>AI研究部 白黒ラボ</div>
+    <div class="meta"><span>REPORT 010</span><span>／</span><span class="tag">お金・節約</span><span>2026年11月28日</span></div>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">検証レポート 010</div>
+    <h1>ふるさと納税は実質2,000円でどれくらいの価値を受け取れるのか？</h1>
+    <p class="lead">寄附額・控除額・返礼品の調達額をモデルケースで並べ、「実質2,000円」の内訳と、上限を超えた場合の負担を整理します。</p>
+    <div class="rule"></div>
+  </header>
+
+  <main>
+    <section>
+      <div class="summary">
+        <p>年収500万円（独身または共働き）が上限いっぱいの<strong>61,000円</strong>を寄附した場合、控除は<strong>59,000円</strong>で、実質自己負担は<strong>2,000円</strong>。返礼品の価値は調達割合3割の上限で計算すると<strong>最大18,300円相当</strong>でした。一方、上限を超えた分は全額自己負担になります。</p>
+        <div class="metrics">
+          <div class="metric"><small>寄附額（モデルケース）</small><b>61,000円</b></div>
+          <div class="metric"><small>控除額</small><b>59,000円</b></div>
+          <div class="metric"><small>返礼品の調達額上限</small><b>18,300円</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>年収・家族構成別の比較</h2>
+      <p>以下は、給与所得者で他の控除がない場合を想定したモデルケースです。自己負担額はいずれも2,000円として整理しています。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>モデルケース</th><th>寄附上限額</th><th>控除額</th><th>返礼品の最大相当額</th><th>自己負担</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>年収400万円（独身・共働き）</td><td><strong>42,000円</strong></td><td>40,000円</td><td>12,600円</td><td>2,000円</td></tr>
+            <tr><td>年収500万円（独身・共働き）</td><td><strong>61,000円</strong></td><td>59,000円</td><td>18,300円</td><td>2,000円</td></tr>
+            <tr><td>年収500万円（夫婦）</td><td><strong>49,000円</strong></td><td>47,000円</td><td>14,700円</td><td>2,000円</td></tr>
+            <tr><td>年収600万円（独身・共働き）</td><td><strong>77,000円</strong></td><td>75,000円</td><td>23,100円</td><td>2,000円</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">返礼品の最大相当額は、寄附額の3割として算出した調達価格ベースの目安です。表示額はモデルケースの概算であり、個別の控除上限額を保証するものではありません。</p>
+    </section>
+
+    <section>
+      <h2>「実質2,000円」の内訳</h2>
+      <p>年収500万円・独身または共働きのモデルでは、寄附額61,000円のうち59,000円が所得税・住民税の控除対象となり、差額の2,000円が自己負担として残る計算です。</p>
+      <div class="formula">
+        <span>寄附額 61,000円</span><span class="minus">−</span><span>控除額 59,000円</span><span class="minus">＝</span><span class="result">自己負担 2,000円</span>
+      </div>
+      <div class="callout"><strong>返礼品の「18,300円相当」は販売価格ではありません。</strong><br>寄附額61,000円の3割にあたる調達割合の上限を当てはめた金額です。実際の店頭価格・通販価格や、受け取る人が感じる価値とは一致しない場合があります。</div>
+    </section>
+
+    <section>
+      <h2>条件によって変わること</h2>
+      <div class="grid2">
+        <div class="info-card">
+          <h3>1. 上限を超えた場合</h3>
+          <p>年収500万円・独身のモデルで100,000円を寄附した場合、控除額が59,000円までとすると、差額の<strong>41,000円</strong>が実質負担になります。</p>
+          <div class="formula"><span>100,000円</span><span class="minus">−</span><span>59,000円</span><span class="minus">＝</span><span class="result">41,000円</span></div>
+        </div>
+        <div class="info-card">
+          <h3>2. 家族構成による違い</h3>
+          <p>同じ年収でも、配偶者控除や扶養の状況などによって控除上限額は変わります。今回の比較でも、年収500万円の独身・共働きは61,000円、夫婦は49,000円というモデル差が出ています。</p>
+        </div>
+      </div>
+      <h3>3. 控除を受けるための手続き</h3>
+      <div class="grid2">
+        <div class="info-card">
+          <h3>ワンストップ特例</h3>
+          <ul>
+            <li>寄附先が年間5自治体以内であることなどが条件</li>
+            <li>申請書は寄附した翌年の1月10日必着</li>
+            <li>控除は原則として翌年度の住民税から行われる</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>確定申告</h3>
+          <ul>
+            <li>所得税の還付と、翌年度の住民税の減額に分かれて反映</li>
+            <li>確定申告を行うと、提出済みのワンストップ特例申請は無効</li>
+            <li>ワンストップ特例を申請した寄附分も含めて申告する</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>見落としやすい注意点</h2>
+      <ol class="steps">
+        <li><div><strong>ポータルサイト独自ポイントの付与は禁止</strong><br>2025年10月から、ふるさと納税のポータルサイトによる寄附に伴うポイント付与は禁止されています。一方、クレジットカード決済に通常付与されるポイントは、この禁止の対象外です。</div></li>
+        <li><div><strong>確定申告をするとワンストップ特例は無効</strong><br>医療費控除などで確定申告を行う場合、ワンストップ特例の申請だけで手続きが完了した扱いにはなりません。ふるさと納税分も確定申告に含める必要があります。</div></li>
+        <li><div><strong>返礼品の相当額は調達価格ベース</strong><br>返礼品の価値として示した金額は、寄附額の3割という調達割合の上限から算出したものです。実際の販売価格とは異なる場合があります。</div></li>
+        <li><div><strong>寄附と控除には時間差がある</strong><br>寄附金の支払いが先に発生し、控除は原則として翌年の税額計算などで反映されます。寄附した時点で現金が戻る仕組みではありません。</div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>検証の前提と出典</h2>
+      <h3>試算の前提</h3>
+      <ul>
+        <li>他の控除がない給与所得者を想定したモデルケース</li>
+        <li>年収・家族構成ごとの寄附上限額は提示したモデル値を使用</li>
+        <li>返礼品の相当額は寄附額の3割として計算</li>
+        <li>実際の控除上限額は、給与収入、家族構成、各種所得控除などで変動</li>
+      </ul>
+      <h3>参照した公的情報</h3>
+      <ul class="source-list">
+        <li><a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/" target="_blank" rel="noopener noreferrer">総務省｜ふるさと納税ポータルサイト</a></li>
+        <li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1155.htm" target="_blank" rel="noopener noreferrer">国税庁｜タックスアンサー No.1155 ふるさと納税（寄附金控除）</a></li>
+      </ul>
+      <p class="note">本ページは上記の公的情報と、明記したモデル条件に基づく概要整理です。個別の税額計算や制度適用の可否を判定するものではありません。</p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>AIを使用して運営しています。価格・料金は調査時点のものです。試算はモデルケースであり、実際の損得は条件によって変わります。特定のサービス・商品を推奨するものではありません。</p>
+    <p class="copyright">© 2026 AI研究部 白黒ラボ（AI研究部 HP実験室）</p>
+  </div>
+</footer>
+</body>
+</html>
